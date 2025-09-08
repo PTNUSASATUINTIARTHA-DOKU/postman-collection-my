@@ -1,0 +1,393 @@
+{
+	"info": {
+		"_postman_id": "4d755a6f-c572-4248-88ca-1917b240f0bf",
+		"name": "CCDC Malaysia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14577350"
+	},
+	"item": [
+		{
+			"name": "DOKU Direct",
+			"item": [
+				{
+					"name": "Credit Card",
+					"item": [
+						{
+							"name": "CC - Generate Payment Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var uuid = require('uuid');",
+											"pm.variables.set(\"request_id\", uuid.v4());",
+											"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+											"",
+											"function generateSignature(jsonBody) {",
+											"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
+											"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+											"    console.log('Digest Component: ' + jsonBody)",
+											"    console.log('Digest sha256: ' + digestSHA256)",
+											"    console.log('Digest: ' + digestBase64)",
+											"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
+											"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+											"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+											"    'Request-Target:/credit-card/v1/payment-page' + '\\n'+",
+											"    'Digest:' + digestBase64;",
+											"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
+											"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+											"    console.log('Signature Components: ' + signatureComponents)",
+											"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+											"    console.log('Signature: ' + signatureBase64)",
+											"    return 'HMACSHA256='+signatureBase64;",
+											"}",
+											"",
+											"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{client_id}}",
+										"type": "text"
+									},
+									{
+										"key": "Request-Id",
+										"value": "{{request_id}}",
+										"type": "text"
+									},
+									{
+										"key": "Request-Timestamp",
+										"value": "{{request_timestamp}}",
+										"type": "text"
+									},
+									{
+										"key": "Signature",
+										"value": "{{signature}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n    \"order\": {\n       \t\"invoice_number\":\"INV-{{$timestamp}}\",\n       \t\"amount\": 15.5,\n       \t\"callback_url\": \"https://doku.com\",\n       \t\"auto_redirect\": false,\n       \t\"session_id\": \"0000231223\",\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n    \t\"id\":\"W7rbKhPYh76VSHYwHRaGDIbBhgTebgAoWtX\",\n    \t\"name\":\"Anton Budiman\",\n    \t\"email\":\"anton@doku.com\",\n    \t\"phone\":\"+6281287458232\",\n\t\t\"address\":\"Jakarta, Menara Mulia Lt 8\",\n\t\t\"country\":\"ID\"\n\t},\n    \"override_configuration\": {\n        \"themes\": {\n            \"language\": \"ID\",\n            \"background_color\": \"\",\n            \"font_color\": \"\",\n            \"button_background_color\": \"\",\n            \"button_font_color\": \"\"\n        }\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/credit-card/v1/payment-page",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"credit-card",
+										"v1",
+										"payment-page"
+									]
+								},
+								"description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
+							},
+							"response": []
+						},
+						{
+							"name": "CC - Online Refund",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var uuid = require('uuid');",
+											"pm.variables.set(\"request_id\", uuid.v4());",
+											"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+											"",
+											"function generateSignature(jsonBody) {",
+											"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
+											"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+											"    console.log('Digest Component: ' + jsonBody)",
+											"    console.log('Digest sha256: ' + digestSHA256)",
+											"    console.log('Digest: ' + digestBase64)",
+											"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
+											"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+											"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+											"    'Request-Target:/cancellation/credit-card/refund' + '\\n'+",
+											"    'Digest:' + digestBase64;",
+											"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
+											"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+											"    console.log('Signature Components: ' + signatureComponents)",
+											"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+											"    console.log('Signature: ' + signatureBase64)",
+											"    return 'HMACSHA256='+signatureBase64;",
+											"}",
+											"",
+											"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{client_id}}",
+										"type": "text"
+									},
+									{
+										"key": "Request-Id",
+										"value": "{{request_id}}",
+										"type": "text"
+									},
+									{
+										"key": "Request-Timestamp",
+										"value": "{{request_timestamp}}",
+										"type": "text"
+									},
+									{
+										"key": "Signature",
+										"value": "{{signature}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n    \"order\": {\n       \t\"invoice_number\":\"INV-{{$timestamp}}\",\n       \t\"line_items\": [\n\t\t\t{\n      \t\t\"name\": \"DOKU T-Shirt Merah\",\n      \t\t\"price\": 30000,\n      \t\t\"quantity\": 2\n    \t\t},\n\t\t\t{\n      \t\t\"name\": \"DOKU T-Shirt Biru\",\n      \t\t\"price\": 30000,\n      \t\t\"quantity\": 1\n    \t\t}\n  \t\t],\n       \t\"amount\": 90000,\n       \t\"callback_url\": \"https://doku.com\",\n       \t\"auto_redirect\": false,\n       \t\"session_id\": \"0000231223\"\n    },\n    \"customer\": {\n    \t\"id\":\"W7rbKhPYh76VSHYwHRaGDIbBhgTebgAoWtX\",\n    \t\"name\":\"Anton Budiman\",\n    \t\"email\":\"anton@doku.com\",\n    \t\"phone\":\"+6281287458232\",\n\t\t\"address\":\"Jakarta, Menara Mulia Lt 8\",\n\t\t\"country\":\"ID\"\n\t},\n    \"override_configuration\": {\n        \"themes\": {\n            \"language\": \"ID\",\n            \"background_color\": \"\",\n            \"font_color\": \"\",\n            \"button_background_color\": \"\",\n            \"button_font_color\": \"\"\n        }\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/credit-card/v1/cancellation/credit-card/refund",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"credit-card",
+										"v1",
+										"cancellation",
+										"credit-card",
+										"refund"
+									]
+								},
+								"description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "DOKU Direct is a collection of REST APIs for customizing your payment flow"
+		},
+		{
+			"name": "Misc",
+			"item": [
+				{
+					"name": "Check Status API",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var uuid = require('uuid');",
+									"pm.variables.set(\"request_id\", uuid.v4());",
+									"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+									"",
+									"function generateSignature() {",
+									"    var invoiceNumber = 'INV-1747736744'; // Replace this with the Invoice Number or Request-Id as the query params",
+									"",
+									"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
+									"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+									"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+									"    'Request-Target:' + '/orders/v1/status/' + invoiceNumber",
+									"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
+									"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+									"    console.log('Signature Components: ' + signatureComponents)",
+									"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+									"    console.log('Signature: ' + signatureBase64)",
+									"    return 'HMACSHA256='+signatureBase64;",
+									"}",
+									"",
+									"pm.variables.set('signature', generateSignature());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Client-Id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{request_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Request-Timestamp",
+								"value": "{{request_timestamp}}",
+								"type": "text"
+							},
+							{
+								"key": "Signature",
+								"value": "{{signature}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/orders/v1/status/INV-1747736744",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders",
+								"v1",
+								"status",
+								"INV-1747736744"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://api-sandbox.doku.com"
+		},
+		{
+			"key": "prod_url",
+			"value": "https://api.doku.com"
+		},
+		{
+			"key": "client_id",
+			"value": "MCH-0008-1296507211683"
+		},
+		{
+			"key": "secret_key",
+			"value": "SK-ueetNZsj5lOBeki5MMh2"
+		},
+		{
+			"key": "request_id",
+			"value": "93626957-8ebe-4e0e-9778-3a1a623ea18b"
+		},
+		{
+			"key": "private_key",
+			"value": "-----BEGIN PRIVATE KEY-----MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCvmMRrtPyfz6QuCs0dCiXIW1XlAL7r8fU50Td40Tlw3PwKwm5wneebHclH5/n0IMf3I1VHA88E/zMVqTIiGzVv97rlzS7MvpAJ3GQfNVb4DrITRhJHsjqCwNFh6GwsVS40gOc9dO46gDoxO49BbybL18Haaekuw0geU+0QzPPoUP4JgmJp23KXJ6Nf+GPwkJPIZciBIpGl/nWEZbZIXUHTlnQmKDI6BYJZhCLyLr9T2pMIzrE25T5Fav6Q4hbmiDguum03qTgKWt8nH/4rhRN3fwLjfh2+iUezlfNXe3oQ9nWZiNrPV7XUKwX/77ZLSU0OPYLoZZuORu1AsTO0o+njAgMBAAECggEAMgdkbwtxrlaKgFOzfMKXYS4kmspLmw2kwIRLObDinLVZWfdrX8qdYiRqZIJDRLrSPidi9IixQssy0skR74WxA+Wg6jg7TTo975FLNVkNHj+RnMwqCSNOaFJnVW3S5A6gy3SubWQTO7es3LoLZqk0dH9US9ZBCYG52mou8Mpz84wmk1LPcKGxw2hy8MsSA+NPnmkO4hbWpCtJxwJn0PM+9ht64dKGH2Dexw2bSMTts5kZ1nNviSsmvxzaTTwwdNJzr3TgPM9I8RmxlFfR6DKHKtZwGH3z5c6LFwJoXTn2LAJ/ODxGxUZ0rfTMJutkVlo3tN52bC0PsNtNHADHWtAeAQKBgQDCqpJbAhzNMLl60OSPw2/agLiGwoto+XgBG+TBi2/7HSBAedsKbbjvXKXJ+sTkAS31cCrAC6fwtgblw7pslG1XWTCF2R5BFuw7+CURgZZUC/+KONgZIecB3zE2tLm9HA5y4cZ/h8SKqBqdQ1x9tJXhmDbhan6pxqYEPRjFjKlfMwKBgQDm7BSgCWbd7TNIBVfLMlHQSjCxsAirtC0zccT5vMZzHaPQ/tGLJQvi8pug1MAyu6hDcWlKDwOcZCBnMjGRhL0XpkH0uj6L5SMjihuGOD2CQMEhl89O7ONpgpq1nv7lBM0YEYqmuF3yE5WlHveJSpnH05xNjFUfb7tDEsK4zQ8KkQKBgH7QrAOJvsWVhl+SEjPtt8J6tLtlpXg/fIQMbdwAQHUwpkAaoi2LCT019/M64GVAt3X7Gn59mWxgyOGJvrrZftm2irvHk8QHcOIoZ82dxBcAsfqTyYOl6F35zo+68H1X97mzh6KxCcLifGQS7AAgUrvic24p+FYVyTVdr/OSDQytAoGBAN0b8CPM3NJi7VdoxkeqRuxKHZYGGEdQnndD2HfIabyQBOt5EutI7bjA1IOLMv1g8hyh208uUSbOOLiXNx8/GlAqwbyzGHCbVqoQ84nxD/RITKT912KbMKU2iSyesTJZBoilQz2gC1RfrEoO/LZY2CaeWGtok5kmQwhWTlzk/CIBAoGAbYPuQwP3DvFBhcEHmROmph6Ls6W1pis2MR+Xukpf0t2Gi5OG+XpkWmcDvJPKayekRn8scgsuHTRflMVdogHZ3Rw2a22mqQRfIKcsFFeTll551PiorWQwW6cGovAxStMm6wUznzMYp3RadOv4Cf55XZqsHfr56h51uo7Sb659SSY=-----END PRIVATE KEY-----"
+		},
+		{
+			"key": "btn_dgpc_bin",
+			"value": "959626"
+		},
+		{
+			"key": "bri_dgpc_bin",
+			"value": ""
+		},
+		{
+			"key": "bni_dgpc_bin",
+			"value": ""
+		},
+		{
+			"key": "bnc_dgpc_bin",
+			"value": ""
+		},
+		{
+			"key": "mandiri_dgpc_bin",
+			"value": ""
+		},
+		{
+			"key": "permata_dgpc_bin",
+			"value": ""
+		},
+		{
+			"key": "maybank_dgpc_bin",
+			"value": ""
+		},
+		{
+			"key": "bsi_dgpc_bin",
+			"value": ""
+		},
+		{
+			"key": "sinarmas_dgpc_bin",
+			"value": ""
+		},
+		{
+			"key": "danamon_dgpc_bin",
+			"value": ""
+		},
+		{
+			"key": "cimb_dgpc_bin",
+			"value": ""
+		},
+		{
+			"key": "x_signature",
+			"value": ""
+		},
+		{
+			"key": "x_timestamp",
+			"value": ""
+		},
+		{
+			"key": "x_client_key",
+			"value": ""
+		},
+		{
+			"key": "x_external_id",
+			"value": ""
+		},
+		{
+			"key": "invoice_number",
+			"value": ""
+		},
+		{
+			"key": "expired_date",
+			"value": ""
+		},
+		{
+			"key": "partner_service_id",
+			"value": ""
+		}
+	]
+}
