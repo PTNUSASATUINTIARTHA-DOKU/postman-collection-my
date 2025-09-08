@@ -1,193 +1,411 @@
 {
 	"info": {
-		"_postman_id": "4d755a6f-c572-4248-88ca-1917b240f0bf",
-		"name": "CCDC Malaysia",
+		"_postman_id": "0af16740-11ff-41d2-8f27-713f11741a25",
+		"name": "DOKU MY API Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "14577350"
+		"_exporter_id": "42079928"
 	},
 	"item": [
 		{
 			"name": "DOKU Direct",
 			"item": [
 				{
-					"name": "Credit Card",
+					"name": "Cards",
 					"item": [
 						{
-							"name": "CC - Generate Payment Page",
-							"event": [
+							"name": "Payment Form",
+							"item": [
 								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"var uuid = require('uuid');",
-											"pm.variables.set(\"request_id\", uuid.v4());",
-											"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
-											"",
-											"function generateSignature(jsonBody) {",
-											"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
-											"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
-											"    console.log('Digest Component: ' + jsonBody)",
-											"    console.log('Digest sha256: ' + digestSHA256)",
-											"    console.log('Digest: ' + digestBase64)",
-											"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
-											"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
-											"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
-											"    'Request-Target:/credit-card/v1/payment-page' + '\\n'+",
-											"    'Digest:' + digestBase64;",
-											"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
-											"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
-											"    console.log('Signature Components: ' + signatureComponents)",
-											"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
-											"    console.log('Signature: ' + signatureBase64)",
-											"    return 'HMACSHA256='+signatureBase64;",
-											"}",
-											"",
-											"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Client-Id",
-										"value": "{{client_id}}",
-										"type": "text"
-									},
-									{
-										"key": "Request-Id",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "Request-Timestamp",
-										"value": "{{request_timestamp}}",
-										"type": "text"
-									},
-									{
-										"key": "Signature",
-										"value": "{{signature}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{ \n    \"order\": {\n       \t\"invoice_number\":\"INV-{{$timestamp}}\",\n       \t\"amount\": 15.5,\n       \t\"callback_url\": \"https://doku.com\",\n       \t\"auto_redirect\": false,\n       \t\"session_id\": \"0000231223\",\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n    \t\"id\":\"W7rbKhPYh76VSHYwHRaGDIbBhgTebgAoWtX\",\n    \t\"name\":\"Anton Budiman\",\n    \t\"email\":\"anton@doku.com\",\n    \t\"phone\":\"+6281287458232\",\n\t\t\"address\":\"Jakarta, Menara Mulia Lt 8\",\n\t\t\"country\":\"ID\"\n\t},\n    \"override_configuration\": {\n        \"themes\": {\n            \"language\": \"ID\",\n            \"background_color\": \"\",\n            \"font_color\": \"\",\n            \"button_background_color\": \"\",\n            \"button_font_color\": \"\"\n        }\n    }\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"name": "Request Payment",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var uuid = require('uuid');",
+													"pm.variables.set(\"request_id\", uuid.v4());",
+													"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+													"",
+													"function generateSignature(jsonBody) {",
+													"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
+													"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+													"    console.log('Digest Component: ' + jsonBody)",
+													"    console.log('Digest sha256: ' + digestSHA256)",
+													"    console.log('Digest: ' + digestBase64)",
+													"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
+													"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+													"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+													"    'Request-Target:/credit-card/v1/payment-page' + '\\n'+",
+													"    'Digest:' + digestBase64;",
+													"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
+													"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+													"    console.log('Signature Components: ' + signatureComponents)",
+													"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+													"    console.log('Signature: ' + signatureBase64)",
+													"    return 'HMACSHA256='+signatureBase64;",
+													"}",
+													"",
+													"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
 										}
-									}
-								},
-								"url": {
-									"raw": "{{url}}/credit-card/v1/payment-page",
-									"host": [
-										"{{url}}"
 									],
-									"path": [
-										"credit-card",
-										"v1",
-										"payment-page"
-									]
-								},
-								"description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
-							},
-							"response": []
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Client-Id",
+												"value": "{{client_id}}",
+												"type": "text"
+											},
+											{
+												"key": "Request-Id",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "Request-Timestamp",
+												"value": "{{request_timestamp}}",
+												"type": "text"
+											},
+											{
+												"key": "Signature",
+												"value": "{{signature}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{ \n    \"order\": {\n       \t\"invoice_number\":\"INV-{{$timestamp}}\",\n       \t\"line_items\": [\n\t\t\t{\n      \t\t\"name\": \"DOKU T-Shirt Merah\",\n      \t\t\"price\": 1,\n      \t\t\"quantity\": 2\n    \t\t},\n\t\t\t{\n      \t\t\"name\": \"DOKU T-Shirt Biru\",\n      \t\t\"price\": 2.5,\n      \t\t\"quantity\": 1\n    \t\t}\n  \t\t],\n       \t\"amount\": 4.5,\n       \t\"callback_url\": \"https://doku.com\",\n       \t\"auto_redirect\": false,\n       \t\"session_id\": \"0000231223\",\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n    \t\"id\":\"W7rbKhPYh76VSHYwHRaGDIbBhgTebgAoWtX\",\n    \t\"name\":\"Anton Budiman\",\n    \t\"email\":\"anton@doku.com\",\n    \t\"phone\":\"+6281287458232\",\n\t\t\"address\":\"Jakarta, Menara Mulia Lt 8\",\n\t\t\"country\":\"ID\"\n\t},\n    \"override_configuration\": {\n        \"themes\": {\n            \"language\": \"ID\",\n            \"background_color\": \"\",\n            \"font_color\": \"\",\n            \"button_background_color\": \"\",\n            \"button_font_color\": \"\"\n        }\n    }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/credit-card/v1/payment-page/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"credit-card",
+												"v1",
+												"payment-page",
+												""
+											]
+										},
+										"description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
+									},
+									"response": []
+								}
+							]
 						},
 						{
-							"name": "CC - Online Refund",
-							"event": [
+							"name": "Host-to-host Payment",
+							"item": [
 								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"var uuid = require('uuid');",
-											"pm.variables.set(\"request_id\", uuid.v4());",
-											"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
-											"",
-											"function generateSignature(jsonBody) {",
-											"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
-											"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
-											"    console.log('Digest Component: ' + jsonBody)",
-											"    console.log('Digest sha256: ' + digestSHA256)",
-											"    console.log('Digest: ' + digestBase64)",
-											"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
-											"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
-											"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
-											"    'Request-Target:/cancellation/credit-card/refund' + '\\n'+",
-											"    'Digest:' + digestBase64;",
-											"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
-											"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
-											"    console.log('Signature Components: ' + signatureComponents)",
-											"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
-											"    console.log('Signature: ' + signatureBase64)",
-											"    return 'HMACSHA256='+signatureBase64;",
-											"}",
-											"",
-											"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Client-Id",
-										"value": "{{client_id}}",
-										"type": "text"
-									},
-									{
-										"key": "Request-Id",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "Request-Timestamp",
-										"value": "{{request_timestamp}}",
-										"type": "text"
-									},
-									{
-										"key": "Signature",
-										"value": "{{signature}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{ \n    \"order\": {\n       \t\"invoice_number\":\"INV-{{$timestamp}}\",\n       \t\"line_items\": [\n\t\t\t{\n      \t\t\"name\": \"DOKU T-Shirt Merah\",\n      \t\t\"price\": 30000,\n      \t\t\"quantity\": 2\n    \t\t},\n\t\t\t{\n      \t\t\"name\": \"DOKU T-Shirt Biru\",\n      \t\t\"price\": 30000,\n      \t\t\"quantity\": 1\n    \t\t}\n  \t\t],\n       \t\"amount\": 90000,\n       \t\"callback_url\": \"https://doku.com\",\n       \t\"auto_redirect\": false,\n       \t\"session_id\": \"0000231223\"\n    },\n    \"customer\": {\n    \t\"id\":\"W7rbKhPYh76VSHYwHRaGDIbBhgTebgAoWtX\",\n    \t\"name\":\"Anton Budiman\",\n    \t\"email\":\"anton@doku.com\",\n    \t\"phone\":\"+6281287458232\",\n\t\t\"address\":\"Jakarta, Menara Mulia Lt 8\",\n\t\t\"country\":\"ID\"\n\t},\n    \"override_configuration\": {\n        \"themes\": {\n            \"language\": \"ID\",\n            \"background_color\": \"\",\n            \"font_color\": \"\",\n            \"button_background_color\": \"\",\n            \"button_font_color\": \"\"\n        }\n    }\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"name": "Charge Payment",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var uuid = require('uuid');",
+													"pm.variables.set(\"request_id\", uuid.v4());",
+													"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+													"",
+													"function generateSignature(jsonBody) {",
+													"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
+													"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+													"    console.log('Digest Component: ' + jsonBody)",
+													"    console.log('Digest sha256: ' + digestSHA256)",
+													"    console.log('Digest: ' + digestBase64)",
+													"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
+													"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+													"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+													"    'Request-Target:/credit-card/v1/payment-page' + '\\n'+",
+													"    'Digest:' + digestBase64;",
+													"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
+													"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+													"    console.log('Signature Components: ' + signatureComponents)",
+													"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+													"    console.log('Signature: ' + signatureBase64)",
+													"    return 'HMACSHA256='+signatureBase64;",
+													"}",
+													"",
+													"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
 										}
-									}
-								},
-								"url": {
-									"raw": "{{url}}/credit-card/v1/cancellation/credit-card/refund",
-									"host": [
-										"{{url}}"
 									],
-									"path": [
-										"credit-card",
-										"v1",
-										"cancellation",
-										"credit-card",
-										"refund"
-									]
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Request-Timestamp",
+												"value": "{{request_timestamp}}",
+												"description": "(Required) Timestamp request on UTC time in ISO8601 UTC+0 format format"
+											},
+											{
+												"key": "Signature",
+												"value": "{{signature}}",
+												"description": "(Required) HMACSHA256 from signature components"
+											},
+											{
+												"key": "Client-Id",
+												"value": "{{client_id}}",
+												"description": "(Required) Unique ID for a partner (DOKU'S Client ID)"
+											},
+											{
+												"key": "Request-Id",
+												"value": "{{request_id}}",
+												"description": "(Required) Numeric String. Reference number that should be unique in the same day (request-id)"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"order\": {\n        \"invoice_number\": \"INV-{{$timestamp}}\",\n        \"amount\": 100,\n        \"descriptor\": \"BIILING-INV-0001\",\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n        \"id\": \"W7rbKhPYh76VSHYwHRaGDIbBhgTebgAoWtX\"\n    },\n    \"payment\": {\n        \"type\": \"MOTO\"\n    },\n    \"card\": {\n        \"token\": \"7a091e9097dd9fa638db7475034ad7cf\"\n    }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/credit-card/charge/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"credit-card",
+												"charge",
+												""
+											]
+										},
+										"description": "Environment\nSandbox - https://api-sandbox.doku.com\nProduction - https://api.doku.com"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "After Payment",
+							"item": [
+								{
+									"name": "Request Refund",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var uuid = require('uuid');",
+													"pm.variables.set(\"request_id\", uuid.v4());",
+													"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+													"",
+													"function generateSignature(jsonBody) {",
+													"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
+													"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+													"    console.log('Digest Component: ' + jsonBody)",
+													"    console.log('Digest sha256: ' + digestSHA256)",
+													"    console.log('Digest: ' + digestBase64)",
+													"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
+													"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+													"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+													"    'Request-Target:/cancellation/credit-card/refund' + '\\n'+",
+													"    'Digest:' + digestBase64;",
+													"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
+													"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+													"    console.log('Signature Components: ' + signatureComponents)",
+													"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+													"    console.log('Signature: ' + signatureBase64)",
+													"    return 'HMACSHA256='+signatureBase64;",
+													"}",
+													"",
+													"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Client-Id",
+												"value": "{{client_id}}",
+												"type": "text"
+											},
+											{
+												"key": "Request-Id",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "Request-Timestamp",
+												"value": "{{request_timestamp}}",
+												"type": "text"
+											},
+											{
+												"key": "Signature",
+												"value": "{{signature}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"order\": {\n        \"invoice_number\": \"INV-1756971941\"\n    },\n    \"payment\": {\n        \"original_request_id\": \"95852dda-73dd-451e-99f8-c457f3928444\"\n    },\n    \"refund\": {\n        \"amount\": 4.5\n    }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/cancellation/credit-card/refund/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"cancellation",
+												"credit-card",
+												"refund",
+												""
+											]
+										},
+										"description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
+									},
+									"response": []
 								},
-								"description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
-							},
-							"response": []
+								{
+									"name": "Unbind Token",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var key = \"bf4728e4f9b50e0abc91a96bcf8361bb\";",
+													"var client_id = \"BRN-TEST-0000000001\";",
+													"var req_id = _.random(1, 100000);",
+													"var dateFormat =  new Date().toISOString().slice(0, 19)+\"Z\";",
+													"var targetPath = \"/tokenization-core/v2/delete-token\";",
+													"",
+													"function generatePayCodeSignature(jsonBody, key, client, req, tgl, target) {",
+													"    var body = (jsonBody.raw);",
+													"    var bodySha256 = CryptoJS.enc.Base64.stringify(CryptoJS.SHA256(body));",
+													"    var signatureComponents = ",
+													"        \"Client-Id:\"+client+\"\\n\"",
+													"        +\"Request-Id:\"+req+\"\\n\"",
+													"        +\"Request-Timestamp:\"+tgl+\"\\n\"",
+													"        +\"Request-Target:\"+target+\"\\n\"",
+													"        +\"Digest:\"+ bodySha256;",
+													"    var signature = CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA256(signatureComponents,key));",
+													"        console.log('body : \\n' + body);",
+													"        console.log('Digest : '+ bodySha256);",
+													"        console.log('UTC : ' +tgl);",
+													"        console.log('Komponen signature : \\n' + signatureComponents);",
+													"        console.log('Signature : ' + signature);",
+													"    return (signature);",
+													"}",
+													"var Header = require('postman-collection').Header",
+													"pm.request.headers.add({key : 'Signature', value :\"HMACSHA256=\"+generatePayCodeSignature(pm.request.body, key, client_id, req_id, dateFormat, targetPath)});",
+													"pm.request.headers.add({key : 'Request-Id', value : req_id});",
+													"pm.request.headers.add({key : 'Client-Id', value : client_id});",
+													"pm.request.headers.add({key : 'Request-Timestamp', value : dateFormat});",
+													"pm.request.headers.add({key: 'Request-Target', value: targetPath });",
+													"",
+													"// var apiKey= \"QM0YDGG51P3QFZND9QJX21TnyinPsxIKWAzemwXuSmutBV1HI\";",
+													"// var secretKey = \"ss#5GT}bqgwj9}SVase@gBUUrgd8f{tzMPeaSWcH\";",
+													"// console.log(\"apiKey \" + apiKey);",
+													"// console.log(\"secretKey \" + secretKey);",
+													"// var vProvId=postman.getGlobalVariable('vProvisionedTokenID');",
+													"// var URI= \"vts/provisionedTokens/\"+vProvId+\"/delete\";",
+													"// console.log(URI);",
+													"// var qP1 = 'apikey=' + apiKey;",
+													"// var qP2 = \"&relationshipID=DokuExtID1\"",
+													"// var timeInSeconds = parseInt((new Date()).getTime() / 1000);",
+													"// console.log(\"timeInSeconds \" + timeInSeconds);",
+													"// var request=JSON.parse(JSON.stringify(request.data));",
+													"// var beforeHash = timeInSeconds + URI + qP1 + qP2 + request;",
+													"// var hash = CryptoJS.HmacSHA256(beforeHash, secretKey);",
+													"// var hashInBase64 = CryptoJS.enc.Hex.stringify(hash);",
+													"// hashInBase64=\"xv2:\" + timeInSeconds + \":\" + hashInBase64;",
+													"// console.log(\"hashInBase64 \" + hashInBase64);",
+													"// postman.setGlobalVariable(\"xpayToken\", hashInBase64);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-pay-token",
+												"value": "{{xpayToken}}",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-request-id",
+												"value": "100",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "platformType",
+												"value": "WEB",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"token\": {\n        \"id\": \"289b56b6973334a09cd7b37ca3482e27\"\n    }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/tokenization/v2/delete-token",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"tokenization",
+												"v2",
+												"delete-token"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				}
@@ -198,7 +416,7 @@
 			"name": "Misc",
 			"item": [
 				{
-					"name": "Check Status API",
+					"name": "Check Status",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -209,7 +427,7 @@
 									"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
 									"",
 									"function generateSignature() {",
-									"    var invoiceNumber = 'INV-1747736744'; // Replace this with the Invoice Number or Request-Id as the query params",
+									"    var invoiceNumber = 'INV-1640746942'; // Replace this with the Invoice Number or Request-Id as the query params",
 									"",
 									"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
 									"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
@@ -225,8 +443,7 @@
 									"",
 									"pm.variables.set('signature', generateSignature());"
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -255,7 +472,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/orders/v1/status/INV-1747736744",
+							"raw": "{{url}}/orders/v1/status/INV-1640746942",
 							"host": [
 								"{{url}}"
 							],
@@ -263,7 +480,7 @@
 								"orders",
 								"v1",
 								"status",
-								"INV-1747736744"
+								"INV-1640746942"
 							]
 						}
 					},
@@ -303,11 +520,11 @@
 		},
 		{
 			"key": "client_id",
-			"value": "MCH-0008-1296507211683"
+			"value": "MCH-0003-8279340109246"
 		},
 		{
 			"key": "secret_key",
-			"value": "SK-ueetNZsj5lOBeki5MMh2"
+			"value": "SK-7D9Lk82lxvJ2tPn18d4t"
 		},
 		{
 			"key": "request_id",
@@ -315,7 +532,7 @@
 		},
 		{
 			"key": "private_key",
-			"value": "-----BEGIN PRIVATE KEY-----MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCvmMRrtPyfz6QuCs0dCiXIW1XlAL7r8fU50Td40Tlw3PwKwm5wneebHclH5/n0IMf3I1VHA88E/zMVqTIiGzVv97rlzS7MvpAJ3GQfNVb4DrITRhJHsjqCwNFh6GwsVS40gOc9dO46gDoxO49BbybL18Haaekuw0geU+0QzPPoUP4JgmJp23KXJ6Nf+GPwkJPIZciBIpGl/nWEZbZIXUHTlnQmKDI6BYJZhCLyLr9T2pMIzrE25T5Fav6Q4hbmiDguum03qTgKWt8nH/4rhRN3fwLjfh2+iUezlfNXe3oQ9nWZiNrPV7XUKwX/77ZLSU0OPYLoZZuORu1AsTO0o+njAgMBAAECggEAMgdkbwtxrlaKgFOzfMKXYS4kmspLmw2kwIRLObDinLVZWfdrX8qdYiRqZIJDRLrSPidi9IixQssy0skR74WxA+Wg6jg7TTo975FLNVkNHj+RnMwqCSNOaFJnVW3S5A6gy3SubWQTO7es3LoLZqk0dH9US9ZBCYG52mou8Mpz84wmk1LPcKGxw2hy8MsSA+NPnmkO4hbWpCtJxwJn0PM+9ht64dKGH2Dexw2bSMTts5kZ1nNviSsmvxzaTTwwdNJzr3TgPM9I8RmxlFfR6DKHKtZwGH3z5c6LFwJoXTn2LAJ/ODxGxUZ0rfTMJutkVlo3tN52bC0PsNtNHADHWtAeAQKBgQDCqpJbAhzNMLl60OSPw2/agLiGwoto+XgBG+TBi2/7HSBAedsKbbjvXKXJ+sTkAS31cCrAC6fwtgblw7pslG1XWTCF2R5BFuw7+CURgZZUC/+KONgZIecB3zE2tLm9HA5y4cZ/h8SKqBqdQ1x9tJXhmDbhan6pxqYEPRjFjKlfMwKBgQDm7BSgCWbd7TNIBVfLMlHQSjCxsAirtC0zccT5vMZzHaPQ/tGLJQvi8pug1MAyu6hDcWlKDwOcZCBnMjGRhL0XpkH0uj6L5SMjihuGOD2CQMEhl89O7ONpgpq1nv7lBM0YEYqmuF3yE5WlHveJSpnH05xNjFUfb7tDEsK4zQ8KkQKBgH7QrAOJvsWVhl+SEjPtt8J6tLtlpXg/fIQMbdwAQHUwpkAaoi2LCT019/M64GVAt3X7Gn59mWxgyOGJvrrZftm2irvHk8QHcOIoZ82dxBcAsfqTyYOl6F35zo+68H1X97mzh6KxCcLifGQS7AAgUrvic24p+FYVyTVdr/OSDQytAoGBAN0b8CPM3NJi7VdoxkeqRuxKHZYGGEdQnndD2HfIabyQBOt5EutI7bjA1IOLMv1g8hyh208uUSbOOLiXNx8/GlAqwbyzGHCbVqoQ84nxD/RITKT912KbMKU2iSyesTJZBoilQz2gC1RfrEoO/LZY2CaeWGtok5kmQwhWTlzk/CIBAoGAbYPuQwP3DvFBhcEHmROmph6Ls6W1pis2MR+Xukpf0t2Gi5OG+XpkWmcDvJPKayekRn8scgsuHTRflMVdogHZ3Rw2a22mqQRfIKcsFFeTll551PiorWQwW6cGovAxStMm6wUznzMYp3RadOv4Cf55XZqsHfr56h51uo7Sb659SSY=-----END PRIVATE KEY-----"
+			"value": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCx1sG5T84ty8oA\nW4IgQIOsR2hmWoI4xSn6TDrr/WsF5Z53vm35Hbj4lqvsRGEvqSzIExapGKe64TP3\ndLeMvCfpcixHsm05Dzdxfv2Wd9XWSE3XsexNH8HGpSE56aNsmU1se4l96zkujJOs\niBfwwo4wDQcDp57o9T4tJOXdk827DA2zsQXBBTcaDZ6iqsixYUvJXa76SFUtyXC+\nSm9rk7n6bomSCoSuEs6FiKQ6rNSQSU4UQD4PpNPv+g6Aeem0MIBD+2kAOncXSzbv\neMxd4BLooypOJaMI/bZxfqkiLXUo3ll0kopjmvzN6KAxJgTEOok64EMjREhm9l9J\nloBdXpUXAgMBAAECggEAYzoXl2VO/kCB8lccsRAuJ/cj6lA/7pscQ/s6uSgKCh1H\noTqQs/oAljvDq62vqF81jGESOMF3/Q7g5wapz43Am0HIMSz+QmMaJWqc5dLxboGj\nZWFyHspEXakPc/fH5rVW/NulKKwRmMZ5M0AwU3bKzUbHjiN9yC/mRFwdIdfxZ5Zx\nBfKL8X9d2OmzGnR/76PFJrjFKnPVKLSQZyBvMJgk/INrJ5F2t7Twcmf9EnHScDWI\nBtCd4EmIuejLMB4kC7lCcWNCOL9DBNL2ka9YeLZ34tjE4Itvowtz1hgdNcAkoFAt\nwMRxUf9vVqkukqt/0c37UAsrwjXFIAfRkSKatV0WGQKBgQDWxuDPKwsCeY6VAY0f\naa/kKbSBgau2Sgsgx0yNvtCx2/gK1eKuHScXbCer8sXYVPO9nwNkynMEO5pec4vV\nfhmleDrKH18kYXafNeTuXV4gotnm51OWOaQZkwIBnUV8BxnMlL9gicIn4bFNrtaW\nP+MmHafacjScJr3li+DTAApWawKBgQDT+Ou6Mck7c2guAv2RDl9CH6o267Sr2fcU\n29uKSHchp0qmrMcFfA27NMqC4zsYIw41wnIOrGXwh0jg1UHHqjswGoyO3ED4VCec\n7AiHOd97As3y48Mvm5liYx5LeRRJML5zvBH14W490NUHXOsSNWpJ49EnoxkLbcS9\nh9R30LfvBQKBgAuHdX3pc5fYapz5DlhHVhfLXVMuYMdSRjKmQCfDvHQvuKrsPFTY\nX8bUGXUTfSdVuBfPt2DrtSze/jRfw3vcXwgQ4icDdBoB2VpGjFl3TZw24beRZ11D\nDtoImCz6AkbcIrhmq7dE7dUyOlBPOFmsaEcdhGsngkd3lO4DijgJYoStAoGBALZ5\nhWvO6f1sttVNK72Qkr5Yhe4rcGe0BjiFn3NmOG/XFLNw7w8woJ10r5SHSlrX6qaq\n0gcBr+ukej9aNftM9xDM+g0NXDyqLUOwCRNn5ZN+cY5TNbapCxygWPb9r1HmTT1S\nPF/fhUhfmtNw0MfnBa3AGVA23htxjjjeUjAmlACFAoGBAKxnvtLNDatmsuvxkKo4\nzUvrDVc4lRCZBXZvY6HXnaK9BLeyJ16Hb8yz9Ig222gKr4PAJCW5DOJKbHqHuGhZ\nAAjXo3wdH4AmODAh/kkysZlyQ2pY52r0C7xjsIeEGJbrwIBLWL3tEd3Hsjwnj6gd\nMdU1l0PsqOEv0kYbuKHVaGmm\n-----END PRIVATE KEY-----"
 		},
 		{
 			"key": "btn_dgpc_bin",
@@ -388,6 +605,11 @@
 		{
 			"key": "partner_service_id",
 			"value": ""
+		},
+		{
+			"key": "base_url_api",
+			"value": "",
+			"type": "default"
 		}
 	]
 }
