@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0af16740-11ff-41d2-8f27-713f11741a25",
+		"_postman_id": "3deb2638-ea5a-48ee-97eb-380bc8d173d6",
 		"name": "DOKU MY API Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "42079928"
@@ -81,7 +81,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{ \n    \"order\": {\n       \t\"invoice_number\":\"INV-{{$timestamp}}\",\n       \t\"line_items\": [\n\t\t\t{\n      \t\t\"name\": \"DOKU T-Shirt Merah\",\n      \t\t\"price\": 1,\n      \t\t\"quantity\": 2\n    \t\t},\n\t\t\t{\n      \t\t\"name\": \"DOKU T-Shirt Biru\",\n      \t\t\"price\": 2.5,\n      \t\t\"quantity\": 1\n    \t\t}\n  \t\t],\n       \t\"amount\": 4.5,\n       \t\"callback_url\": \"https://doku.com\",\n       \t\"auto_redirect\": false,\n       \t\"session_id\": \"0000231223\",\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n    \t\"id\":\"W7rbKhPYh76VSHYwHRaGDIbBhgTebgAoWtX\",\n    \t\"name\":\"Anton Budiman\",\n    \t\"email\":\"anton@doku.com\",\n    \t\"phone\":\"+6281287458232\",\n\t\t\"address\":\"Jakarta, Menara Mulia Lt 8\",\n\t\t\"country\":\"ID\"\n\t},\n    \"override_configuration\": {\n        \"themes\": {\n            \"language\": \"ID\",\n            \"background_color\": \"\",\n            \"font_color\": \"\",\n            \"button_background_color\": \"\",\n            \"button_font_color\": \"\"\n        }\n    }\n}",
+											"raw": "{ \n    \"order\": {\n       \t\"invoice_number\":\"INV-{{$timestamp}}\",\n       \t\"amount\": 4.5,\n       \t\"callback_url\": \"https://doku.com\",\n       \t\"auto_redirect\": false,\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n    \t\"id\":\"DOKUMY-01\",\n    \t\"name\":\"Anton Budiman\",\n    \t\"email\":\"anton@doku.com\",\n    \t\"phone\":\"+6281287458232\"\n\t}\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -89,15 +89,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/credit-card/v1/payment-page/",
+											"raw": "{{url}}/credit-card/v1/payment-page",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"credit-card",
 												"v1",
-												"payment-page",
-												""
+												"payment-page"
 											]
 										},
 										"description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
@@ -129,7 +128,7 @@
 													"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
 													"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
 													"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
-													"    'Request-Target:/credit-card/v1/payment-page' + '\\n'+",
+													"    'Request-Target:/credit-card/charge' + '\\n'+",
 													"    'Digest:' + digestBase64;",
 													"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
 													"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
@@ -172,7 +171,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"order\": {\n        \"invoice_number\": \"INV-{{$timestamp}}\",\n        \"amount\": 100,\n        \"descriptor\": \"BIILING-INV-0001\",\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n        \"id\": \"W7rbKhPYh76VSHYwHRaGDIbBhgTebgAoWtX\"\n    },\n    \"payment\": {\n        \"type\": \"MOTO\"\n    },\n    \"card\": {\n        \"token\": \"7a091e9097dd9fa638db7475034ad7cf\"\n    }\n}",
+											"raw": "{\n    \"order\": {\n        \"invoice_number\": \"INV-{{$timestamp}}\",\n        \"amount\": 5,\n        \"descriptor\": \"BIILING-INV-0001\",\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n        \"id\": \"DOKUMY-02\"\n    },\n    \"payment\": {\n        \"type\": \"MOTO\"\n    },\n    \"card\": {\n        \"token\": \"b3bb0cd4f02dc6a698074cc365d288d7\"\n    }\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -181,14 +180,13 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/credit-card/charge/",
+											"raw": "{{url}}/credit-card/charge",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"credit-card",
-												"charge",
-												""
+												"charge"
 											]
 										},
 										"description": "Environment\nSandbox - https://api-sandbox.doku.com\nProduction - https://api.doku.com"
@@ -266,7 +264,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"order\": {\n        \"invoice_number\": \"INV-1756971941\"\n    },\n    \"payment\": {\n        \"original_request_id\": \"95852dda-73dd-451e-99f8-c457f3928444\"\n    },\n    \"refund\": {\n        \"amount\": 4.5\n    }\n}",
+											"raw": "{\n    \"order\": {\n        \"invoice_number\": \"INV-1757388506\"\n    },\n    \"payment\": {\n        \"original_request_id\": \"0c3fc38f-7e0a-48c5-9ee6-e539e8f29c74\"\n    },\n    \"refund\": {\n        \"amount\": 4.5\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -274,15 +272,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/cancellation/credit-card/refund/",
+											"raw": "{{url}}/cancellation/credit-card/refund",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"cancellation",
 												"credit-card",
-												"refund",
-												""
+												"refund"
 											]
 										},
 										"description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
@@ -300,7 +297,7 @@
 													"var client_id = \"BRN-TEST-0000000001\";",
 													"var req_id = _.random(1, 100000);",
 													"var dateFormat =  new Date().toISOString().slice(0, 19)+\"Z\";",
-													"var targetPath = \"/tokenization-core/v2/delete-token\";",
+													"var targetPath = \"/tokenization/v2/delete-token\";",
 													"",
 													"function generatePayCodeSignature(jsonBody, key, client, req, tgl, target) {",
 													"    var body = (jsonBody.raw);",
@@ -384,7 +381,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"token\": {\n        \"id\": \"289b56b6973334a09cd7b37ca3482e27\"\n    }\n}",
+											"raw": "{\n    \"token\": {\n        \"id\": \"9d5d19f0fba2306c161618e81526bd64\"\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -427,7 +424,7 @@
 									"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
 									"",
 									"function generateSignature() {",
-									"    var invoiceNumber = 'INV-1640746942'; // Replace this with the Invoice Number or Request-Id as the query params",
+									"    var invoiceNumber = '0c3fc38f-7e0a-48c5-9ee6-e539e8f29c74'; // Replace this with the Invoice Number or Request-Id as the query params",
 									"",
 									"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
 									"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
@@ -443,7 +440,8 @@
 									"",
 									"pm.variables.set('signature', generateSignature());"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -472,7 +470,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/orders/v1/status/INV-1640746942",
+							"raw": "{{url}}/orders/v1/status/0c3fc38f-7e0a-48c5-9ee6-e539e8f29c74",
 							"host": [
 								"{{url}}"
 							],
@@ -480,7 +478,7 @@
 								"orders",
 								"v1",
 								"status",
-								"INV-1640746942"
+								"0c3fc38f-7e0a-48c5-9ee6-e539e8f29c74"
 							]
 						}
 					},
@@ -525,91 +523,6 @@
 		{
 			"key": "secret_key",
 			"value": "SK-7D9Lk82lxvJ2tPn18d4t"
-		},
-		{
-			"key": "request_id",
-			"value": "93626957-8ebe-4e0e-9778-3a1a623ea18b"
-		},
-		{
-			"key": "private_key",
-			"value": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCx1sG5T84ty8oA\nW4IgQIOsR2hmWoI4xSn6TDrr/WsF5Z53vm35Hbj4lqvsRGEvqSzIExapGKe64TP3\ndLeMvCfpcixHsm05Dzdxfv2Wd9XWSE3XsexNH8HGpSE56aNsmU1se4l96zkujJOs\niBfwwo4wDQcDp57o9T4tJOXdk827DA2zsQXBBTcaDZ6iqsixYUvJXa76SFUtyXC+\nSm9rk7n6bomSCoSuEs6FiKQ6rNSQSU4UQD4PpNPv+g6Aeem0MIBD+2kAOncXSzbv\neMxd4BLooypOJaMI/bZxfqkiLXUo3ll0kopjmvzN6KAxJgTEOok64EMjREhm9l9J\nloBdXpUXAgMBAAECggEAYzoXl2VO/kCB8lccsRAuJ/cj6lA/7pscQ/s6uSgKCh1H\noTqQs/oAljvDq62vqF81jGESOMF3/Q7g5wapz43Am0HIMSz+QmMaJWqc5dLxboGj\nZWFyHspEXakPc/fH5rVW/NulKKwRmMZ5M0AwU3bKzUbHjiN9yC/mRFwdIdfxZ5Zx\nBfKL8X9d2OmzGnR/76PFJrjFKnPVKLSQZyBvMJgk/INrJ5F2t7Twcmf9EnHScDWI\nBtCd4EmIuejLMB4kC7lCcWNCOL9DBNL2ka9YeLZ34tjE4Itvowtz1hgdNcAkoFAt\nwMRxUf9vVqkukqt/0c37UAsrwjXFIAfRkSKatV0WGQKBgQDWxuDPKwsCeY6VAY0f\naa/kKbSBgau2Sgsgx0yNvtCx2/gK1eKuHScXbCer8sXYVPO9nwNkynMEO5pec4vV\nfhmleDrKH18kYXafNeTuXV4gotnm51OWOaQZkwIBnUV8BxnMlL9gicIn4bFNrtaW\nP+MmHafacjScJr3li+DTAApWawKBgQDT+Ou6Mck7c2guAv2RDl9CH6o267Sr2fcU\n29uKSHchp0qmrMcFfA27NMqC4zsYIw41wnIOrGXwh0jg1UHHqjswGoyO3ED4VCec\n7AiHOd97As3y48Mvm5liYx5LeRRJML5zvBH14W490NUHXOsSNWpJ49EnoxkLbcS9\nh9R30LfvBQKBgAuHdX3pc5fYapz5DlhHVhfLXVMuYMdSRjKmQCfDvHQvuKrsPFTY\nX8bUGXUTfSdVuBfPt2DrtSze/jRfw3vcXwgQ4icDdBoB2VpGjFl3TZw24beRZ11D\nDtoImCz6AkbcIrhmq7dE7dUyOlBPOFmsaEcdhGsngkd3lO4DijgJYoStAoGBALZ5\nhWvO6f1sttVNK72Qkr5Yhe4rcGe0BjiFn3NmOG/XFLNw7w8woJ10r5SHSlrX6qaq\n0gcBr+ukej9aNftM9xDM+g0NXDyqLUOwCRNn5ZN+cY5TNbapCxygWPb9r1HmTT1S\nPF/fhUhfmtNw0MfnBa3AGVA23htxjjjeUjAmlACFAoGBAKxnvtLNDatmsuvxkKo4\nzUvrDVc4lRCZBXZvY6HXnaK9BLeyJ16Hb8yz9Ig222gKr4PAJCW5DOJKbHqHuGhZ\nAAjXo3wdH4AmODAh/kkysZlyQ2pY52r0C7xjsIeEGJbrwIBLWL3tEd3Hsjwnj6gd\nMdU1l0PsqOEv0kYbuKHVaGmm\n-----END PRIVATE KEY-----"
-		},
-		{
-			"key": "btn_dgpc_bin",
-			"value": "959626"
-		},
-		{
-			"key": "bri_dgpc_bin",
-			"value": ""
-		},
-		{
-			"key": "bni_dgpc_bin",
-			"value": ""
-		},
-		{
-			"key": "bnc_dgpc_bin",
-			"value": ""
-		},
-		{
-			"key": "mandiri_dgpc_bin",
-			"value": ""
-		},
-		{
-			"key": "permata_dgpc_bin",
-			"value": ""
-		},
-		{
-			"key": "maybank_dgpc_bin",
-			"value": ""
-		},
-		{
-			"key": "bsi_dgpc_bin",
-			"value": ""
-		},
-		{
-			"key": "sinarmas_dgpc_bin",
-			"value": ""
-		},
-		{
-			"key": "danamon_dgpc_bin",
-			"value": ""
-		},
-		{
-			"key": "cimb_dgpc_bin",
-			"value": ""
-		},
-		{
-			"key": "x_signature",
-			"value": ""
-		},
-		{
-			"key": "x_timestamp",
-			"value": ""
-		},
-		{
-			"key": "x_client_key",
-			"value": ""
-		},
-		{
-			"key": "x_external_id",
-			"value": ""
-		},
-		{
-			"key": "invoice_number",
-			"value": ""
-		},
-		{
-			"key": "expired_date",
-			"value": ""
-		},
-		{
-			"key": "partner_service_id",
-			"value": ""
-		},
-		{
-			"key": "base_url_api",
-			"value": "",
-			"type": "default"
 		}
 	]
 }
