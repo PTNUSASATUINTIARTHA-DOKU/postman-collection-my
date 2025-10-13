@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "3deb2638-ea5a-48ee-97eb-380bc8d173d6",
-		"name": "DOKU MY API Collection",
+		"_postman_id": "c4eb2616-2b2a-468f-aba8-5172077b83c1",
+		"name": "DOKU MY API Collection Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "42079928"
+		"_exporter_id": "7064594",
+		"_collection_link": "https://pbl444-5826.postman.co/workspace/DOKU~fdb2c90e-2399-4f2c-8ffe-cd83ebc79b61/collection/7064594-c4eb2616-2b2a-468f-aba8-5172077b83c1?action=share&source=collection_link&creator=7064594"
 	},
 	"item": [
 		{
@@ -53,7 +54,9 @@
 										}
 									],
 									"protocolProfileBehavior": {
-										"disabledSystemHeaders": {}
+										"disabledSystemHeaders": {
+											"accept": true
+										}
 									},
 									"request": {
 										"method": "POST",
@@ -76,6 +79,11 @@
 											{
 												"key": "Signature",
 												"value": "{{signature}}",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
 												"type": "text"
 											}
 										],
@@ -145,6 +153,11 @@
 											}
 										}
 									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {
+											"accept": true
+										}
+									},
 									"request": {
 										"method": "POST",
 										"header": [
@@ -167,6 +180,11 @@
 												"key": "Request-Id",
 												"value": "{{request_id}}",
 												"description": "(Required) Numeric String. Reference number that should be unique in the same day (request-id)"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
 											}
 										],
 										"body": {
@@ -236,7 +254,9 @@
 										}
 									],
 									"protocolProfileBehavior": {
-										"disabledSystemHeaders": {}
+										"disabledSystemHeaders": {
+											"accept": true
+										}
 									},
 									"request": {
 										"method": "POST",
@@ -259,6 +279,11 @@
 											{
 												"key": "Signature",
 												"value": "{{signature}}",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
 												"type": "text"
 											}
 										],
@@ -293,54 +318,30 @@
 											"listen": "prerequest",
 											"script": {
 												"exec": [
-													"var key = \"bf4728e4f9b50e0abc91a96bcf8361bb\";",
-													"var client_id = \"BRN-TEST-0000000001\";",
-													"var req_id = _.random(1, 100000);",
-													"var dateFormat =  new Date().toISOString().slice(0, 19)+\"Z\";",
-													"var targetPath = \"/tokenization/v2/delete-token\";",
+													"var uuid = require('uuid');",
+													"pm.variables.set(\"request_id\", uuid.v4());",
+													"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
 													"",
-													"function generatePayCodeSignature(jsonBody, key, client, req, tgl, target) {",
-													"    var body = (jsonBody.raw);",
-													"    var bodySha256 = CryptoJS.enc.Base64.stringify(CryptoJS.SHA256(body));",
-													"    var signatureComponents = ",
-													"        \"Client-Id:\"+client+\"\\n\"",
-													"        +\"Request-Id:\"+req+\"\\n\"",
-													"        +\"Request-Timestamp:\"+tgl+\"\\n\"",
-													"        +\"Request-Target:\"+target+\"\\n\"",
-													"        +\"Digest:\"+ bodySha256;",
-													"    var signature = CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA256(signatureComponents,key));",
-													"        console.log('body : \\n' + body);",
-													"        console.log('Digest : '+ bodySha256);",
-													"        console.log('UTC : ' +tgl);",
-													"        console.log('Komponen signature : \\n' + signatureComponents);",
-													"        console.log('Signature : ' + signature);",
-													"    return (signature);",
+													"function generateSignature(jsonBody) {",
+													"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
+													"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+													"    console.log('Digest Component: ' + jsonBody)",
+													"    console.log('Digest sha256: ' + digestSHA256)",
+													"    console.log('Digest: ' + digestBase64)",
+													"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
+													"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+													"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+													"    'Request-Target:/tokenization/v2/delete-token' + '\\n'+",
+													"    'Digest:' + digestBase64;",
+													"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
+													"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+													"    console.log('Signature Components: ' + signatureComponents)",
+													"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+													"    console.log('Signature: ' + signatureBase64)",
+													"    return 'HMACSHA256='+signatureBase64;",
 													"}",
-													"var Header = require('postman-collection').Header",
-													"pm.request.headers.add({key : 'Signature', value :\"HMACSHA256=\"+generatePayCodeSignature(pm.request.body, key, client_id, req_id, dateFormat, targetPath)});",
-													"pm.request.headers.add({key : 'Request-Id', value : req_id});",
-													"pm.request.headers.add({key : 'Client-Id', value : client_id});",
-													"pm.request.headers.add({key : 'Request-Timestamp', value : dateFormat});",
-													"pm.request.headers.add({key: 'Request-Target', value: targetPath });",
 													"",
-													"// var apiKey= \"QM0YDGG51P3QFZND9QJX21TnyinPsxIKWAzemwXuSmutBV1HI\";",
-													"// var secretKey = \"ss#5GT}bqgwj9}SVase@gBUUrgd8f{tzMPeaSWcH\";",
-													"// console.log(\"apiKey \" + apiKey);",
-													"// console.log(\"secretKey \" + secretKey);",
-													"// var vProvId=postman.getGlobalVariable('vProvisionedTokenID');",
-													"// var URI= \"vts/provisionedTokens/\"+vProvId+\"/delete\";",
-													"// console.log(URI);",
-													"// var qP1 = 'apikey=' + apiKey;",
-													"// var qP2 = \"&relationshipID=DokuExtID1\"",
-													"// var timeInSeconds = parseInt((new Date()).getTime() / 1000);",
-													"// console.log(\"timeInSeconds \" + timeInSeconds);",
-													"// var request=JSON.parse(JSON.stringify(request.data));",
-													"// var beforeHash = timeInSeconds + URI + qP1 + qP2 + request;",
-													"// var hash = CryptoJS.HmacSHA256(beforeHash, secretKey);",
-													"// var hashInBase64 = CryptoJS.enc.Hex.stringify(hash);",
-													"// hashInBase64=\"xv2:\" + timeInSeconds + \":\" + hashInBase64;",
-													"// console.log(\"hashInBase64 \" + hashInBase64);",
-													"// postman.setGlobalVariable(\"xpayToken\", hashInBase64);"
+													"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
 												],
 												"type": "text/javascript",
 												"packages": {}
@@ -356,32 +357,34 @@
 												"type": "text"
 											},
 											{
-												"key": "x-pay-token",
-												"value": "{{xpayToken}}",
-												"type": "text",
-												"disabled": true
-											},
-											{
 												"key": "Accept",
 												"value": "application/json",
 												"type": "text"
 											},
 											{
-												"key": "x-request-id",
-												"value": "100",
-												"type": "text",
-												"disabled": true
+												"key": "Client-Id",
+												"value": "{{client_id}}",
+												"type": "text"
 											},
 											{
-												"key": "platformType",
-												"value": "WEB",
-												"type": "text",
-												"disabled": true
+												"key": "Request-Id",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "Request-Timestamp",
+												"value": "{{request_timestamp}}",
+												"type": "text"
+											},
+											{
+												"key": "Signature",
+												"value": "{{signature}}",
+												"type": "text"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"token\": {\n        \"id\": \"9d5d19f0fba2306c161618e81526bd64\"\n    }\n}",
+											"raw": "{\n    \"token\": {\n        \"id\": \"1cce7e57d0ac94a8cfca1064d0fce0bd\"\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -389,9 +392,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/tokenization/v2/delete-token",
+											"raw": "{{uat_url}}/tokenization/v2/delete-token",
 											"host": [
-												"{{url}}"
+												"{{uat_url}}"
 											],
 											"path": [
 												"tokenization",
@@ -523,6 +526,11 @@
 		{
 			"key": "secret_key",
 			"value": "SK-7D9Lk82lxvJ2tPn18d4t"
+		},
+		{
+			"key": "uat_url",
+			"value": "https://api-uat.doku.com",
+			"type": "string"
 		}
 	]
 }
