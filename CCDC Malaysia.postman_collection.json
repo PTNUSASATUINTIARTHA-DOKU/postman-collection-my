@@ -1,536 +1,434 @@
 {
-	"info": {
-		"_postman_id": "c4eb2616-2b2a-468f-aba8-5172077b83c1",
-		"name": "DOKU MY API Collection Copy",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "7064594",
-		"_collection_link": "https://pbl444-5826.postman.co/workspace/DOKU~fdb2c90e-2399-4f2c-8ffe-cd83ebc79b61/collection/7064594-c4eb2616-2b2a-468f-aba8-5172077b83c1?action=share&source=collection_link&creator=7064594"
-	},
-	"item": [
-		{
-			"name": "DOKU Direct",
-			"item": [
-				{
-					"name": "Cards",
-					"item": [
-						{
-							"name": "Payment Form",
-							"item": [
-								{
-									"name": "Request Payment",
-									"event": [
-										{
-											"listen": "prerequest",
-											"script": {
-												"exec": [
-													"var uuid = require('uuid');",
-													"pm.variables.set(\"request_id\", uuid.v4());",
-													"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
-													"",
-													"function generateSignature(jsonBody) {",
-													"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
-													"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
-													"    console.log('Digest Component: ' + jsonBody)",
-													"    console.log('Digest sha256: ' + digestSHA256)",
-													"    console.log('Digest: ' + digestBase64)",
-													"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
-													"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
-													"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
-													"    'Request-Target:/credit-card/v1/payment-page' + '\\n'+",
-													"    'Digest:' + digestBase64;",
-													"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
-													"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
-													"    console.log('Signature Components: ' + signatureComponents)",
-													"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
-													"    console.log('Signature: ' + signatureBase64)",
-													"    return 'HMACSHA256='+signatureBase64;",
-													"}",
-													"",
-													"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
-												],
-												"type": "text/javascript",
-												"packages": {}
-											}
-										}
-									],
-									"protocolProfileBehavior": {
-										"disabledSystemHeaders": {
-											"accept": true
-										}
-									},
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Client-Id",
-												"value": "{{client_id}}",
-												"type": "text"
-											},
-											{
-												"key": "Request-Id",
-												"value": "{{request_id}}",
-												"type": "text"
-											},
-											{
-												"key": "Request-Timestamp",
-												"value": "{{request_timestamp}}",
-												"type": "text"
-											},
-											{
-												"key": "Signature",
-												"value": "{{signature}}",
-												"type": "text"
-											},
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{ \n    \"order\": {\n       \t\"invoice_number\":\"INV-{{$timestamp}}\",\n       \t\"amount\": 4.5,\n       \t\"callback_url\": \"https://doku.com\",\n       \t\"auto_redirect\": false,\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n    \t\"id\":\"DOKUMY-01\",\n    \t\"name\":\"Anton Budiman\",\n    \t\"email\":\"anton@doku.com\",\n    \t\"phone\":\"+6281287458232\"\n\t}\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{url}}/credit-card/v1/payment-page",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"credit-card",
-												"v1",
-												"payment-page"
-											]
-										},
-										"description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "Host-to-host Payment",
-							"item": [
-								{
-									"name": "Charge Payment",
-									"event": [
-										{
-											"listen": "prerequest",
-											"script": {
-												"exec": [
-													"var uuid = require('uuid');",
-													"pm.variables.set(\"request_id\", uuid.v4());",
-													"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
-													"",
-													"function generateSignature(jsonBody) {",
-													"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
-													"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
-													"    console.log('Digest Component: ' + jsonBody)",
-													"    console.log('Digest sha256: ' + digestSHA256)",
-													"    console.log('Digest: ' + digestBase64)",
-													"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
-													"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
-													"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
-													"    'Request-Target:/credit-card/charge' + '\\n'+",
-													"    'Digest:' + digestBase64;",
-													"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
-													"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
-													"    console.log('Signature Components: ' + signatureComponents)",
-													"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
-													"    console.log('Signature: ' + signatureBase64)",
-													"    return 'HMACSHA256='+signatureBase64;",
-													"}",
-													"",
-													"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
-												],
-												"type": "text/javascript",
-												"packages": {}
-											}
-										}
-									],
-									"protocolProfileBehavior": {
-										"disabledSystemHeaders": {
-											"accept": true
-										}
-									},
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Request-Timestamp",
-												"value": "{{request_timestamp}}",
-												"description": "(Required) Timestamp request on UTC time in ISO8601 UTC+0 format format"
-											},
-											{
-												"key": "Signature",
-												"value": "{{signature}}",
-												"description": "(Required) HMACSHA256 from signature components"
-											},
-											{
-												"key": "Client-Id",
-												"value": "{{client_id}}",
-												"description": "(Required) Unique ID for a partner (DOKU'S Client ID)"
-											},
-											{
-												"key": "Request-Id",
-												"value": "{{request_id}}",
-												"description": "(Required) Numeric String. Reference number that should be unique in the same day (request-id)"
-											},
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"order\": {\n        \"invoice_number\": \"INV-{{$timestamp}}\",\n        \"amount\": 5,\n        \"descriptor\": \"BIILING-INV-0001\",\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n        \"id\": \"DOKUMY-02\"\n    },\n    \"payment\": {\n        \"type\": \"MOTO\"\n    },\n    \"card\": {\n        \"token\": \"b3bb0cd4f02dc6a698074cc365d288d7\"\n    }\n}",
-											"options": {
-												"raw": {
-													"headerFamily": "json",
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{url}}/credit-card/charge",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"credit-card",
-												"charge"
-											]
-										},
-										"description": "Environment\nSandbox - https://api-sandbox.doku.com\nProduction - https://api.doku.com"
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "After Payment",
-							"item": [
-								{
-									"name": "Request Refund",
-									"event": [
-										{
-											"listen": "prerequest",
-											"script": {
-												"exec": [
-													"var uuid = require('uuid');",
-													"pm.variables.set(\"request_id\", uuid.v4());",
-													"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
-													"",
-													"function generateSignature(jsonBody) {",
-													"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
-													"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
-													"    console.log('Digest Component: ' + jsonBody)",
-													"    console.log('Digest sha256: ' + digestSHA256)",
-													"    console.log('Digest: ' + digestBase64)",
-													"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
-													"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
-													"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
-													"    'Request-Target:/cancellation/credit-card/refund' + '\\n'+",
-													"    'Digest:' + digestBase64;",
-													"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
-													"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
-													"    console.log('Signature Components: ' + signatureComponents)",
-													"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
-													"    console.log('Signature: ' + signatureBase64)",
-													"    return 'HMACSHA256='+signatureBase64;",
-													"}",
-													"",
-													"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
-												],
-												"type": "text/javascript",
-												"packages": {}
-											}
-										}
-									],
-									"protocolProfileBehavior": {
-										"disabledSystemHeaders": {
-											"accept": true
-										}
-									},
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Client-Id",
-												"value": "{{client_id}}",
-												"type": "text"
-											},
-											{
-												"key": "Request-Id",
-												"value": "{{request_id}}",
-												"type": "text"
-											},
-											{
-												"key": "Request-Timestamp",
-												"value": "{{request_timestamp}}",
-												"type": "text"
-											},
-											{
-												"key": "Signature",
-												"value": "{{signature}}",
-												"type": "text"
-											},
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"order\": {\n        \"invoice_number\": \"INV-1757388506\"\n    },\n    \"payment\": {\n        \"original_request_id\": \"0c3fc38f-7e0a-48c5-9ee6-e539e8f29c74\"\n    },\n    \"refund\": {\n        \"amount\": 4.5\n    }\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{url}}/cancellation/credit-card/refund",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"cancellation",
-												"credit-card",
-												"refund"
-											]
-										},
-										"description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
-									},
-									"response": []
-								},
-								{
-									"name": "Unbind Token",
-									"event": [
-										{
-											"listen": "prerequest",
-											"script": {
-												"exec": [
-													"var uuid = require('uuid');",
-													"pm.variables.set(\"request_id\", uuid.v4());",
-													"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
-													"",
-													"function generateSignature(jsonBody) {",
-													"    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
-													"    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
-													"    console.log('Digest Component: ' + jsonBody)",
-													"    console.log('Digest sha256: ' + digestSHA256)",
-													"    console.log('Digest: ' + digestBase64)",
-													"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
-													"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
-													"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
-													"    'Request-Target:/tokenization/v2/delete-token' + '\\n'+",
-													"    'Digest:' + digestBase64;",
-													"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
-													"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
-													"    console.log('Signature Components: ' + signatureComponents)",
-													"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
-													"    console.log('Signature: ' + signatureBase64)",
-													"    return 'HMACSHA256='+signatureBase64;",
-													"}",
-													"",
-													"pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
-												],
-												"type": "text/javascript",
-												"packages": {}
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Client-Id",
-												"value": "{{client_id}}",
-												"type": "text"
-											},
-											{
-												"key": "Request-Id",
-												"value": "{{request_id}}",
-												"type": "text"
-											},
-											{
-												"key": "Request-Timestamp",
-												"value": "{{request_timestamp}}",
-												"type": "text"
-											},
-											{
-												"key": "Signature",
-												"value": "{{signature}}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"token\": {\n        \"id\": \"1cce7e57d0ac94a8cfca1064d0fce0bd\"\n    }\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{uat_url}}/tokenization/v2/delete-token",
-											"host": [
-												"{{uat_url}}"
-											],
-											"path": [
-												"tokenization",
-												"v2",
-												"delete-token"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						}
-					]
-				}
-			],
-			"description": "DOKU Direct is a collection of REST APIs for customizing your payment flow"
-		},
-		{
-			"name": "Misc",
-			"item": [
-				{
-					"name": "Check Status",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"var uuid = require('uuid');",
-									"pm.variables.set(\"request_id\", uuid.v4());",
-									"pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
-									"",
-									"function generateSignature() {",
-									"    var invoiceNumber = '0c3fc38f-7e0a-48c5-9ee6-e539e8f29c74'; // Replace this with the Invoice Number or Request-Id as the query params",
-									"",
-									"    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id') +'\\n'+",
-									"    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
-									"    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
-									"    'Request-Target:' + '/orders/v1/status/' + invoiceNumber",
-									"    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key'));",
-									"    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
-									"    console.log('Signature Components: ' + signatureComponents)",
-									"    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
-									"    console.log('Signature: ' + signatureBase64)",
-									"    return 'HMACSHA256='+signatureBase64;",
-									"}",
-									"",
-									"pm.variables.set('signature', generateSignature());"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Client-Id",
-								"value": "{{client_id}}",
-								"type": "text"
-							},
-							{
-								"key": "Request-Id",
-								"value": "{{request_id}}",
-								"type": "text"
-							},
-							{
-								"key": "Request-Timestamp",
-								"value": "{{request_timestamp}}",
-								"type": "text"
-							},
-							{
-								"key": "Signature",
-								"value": "{{signature}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/orders/v1/status/0c3fc38f-7e0a-48c5-9ee6-e539e8f29c74",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"orders",
-								"v1",
-								"status",
-								"0c3fc38f-7e0a-48c5-9ee6-e539e8f29c74"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "url",
-			"value": "https://api-sandbox.doku.com"
-		},
-		{
-			"key": "prod_url",
-			"value": "https://api.doku.com"
-		},
-		{
-			"key": "client_id",
-			"value": "MCH-0003-8279340109246"
-		},
-		{
-			"key": "secret_key",
-			"value": "SK-7D9Lk82lxvJ2tPn18d4t"
-		},
-		{
-			"key": "uat_url",
-			"value": "https://api-uat.doku.com",
-			"type": "string"
-		}
-	]
+  "info": {
+    "_postman_id": "dbd8912c-e519-496e-a866-f1d1b67b5fb9",
+    "name": "DOKU MY API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "42079928"
+  },
+  "item": [
+    {
+      "name": "Checkout API",
+      "item": [
+        {
+          "name": "Create Checkout",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "function generateSignature(jsonBody) {",
+                  "    var digestSHA256 = CryptoJS.SHA256(jsonBody);",
+                  "    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+                  "    var signatureComponents =",
+                  "        pm.variables.get('client_id') +'\\n' +",
+                  "        pm.variables.get('request_timestamp') + '\\n'+",
+                  "        pm.variables.get('request_target') + '\\n'+",
+                  "        digestBase64;",
+                  "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents, pm.variables.get('secret_key'));",
+                  "    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+                  "    return 'HMACSHA256='+signatureBase64;",
+                  "}",
+                  "pm.variables.set('generatedRequestId', Date.now());",
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+                  "pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{basic_auth}}"
+              },
+              {
+                "key": "Client-Id",
+                "value": "{{client_id}}"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}"
+              },
+              {
+                "key": "Signature",
+                "value": "{{signature}}"
+              },
+              {
+                "key": "API-Version",
+                "value": "arabica.2025-12-01"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 2.5,\n        \"invoice_number\": \"INV-CHECKOUT-{{$timestamp}}\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"24\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 2,\n                \"price\": 1,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            },\n            {\n                \"id\": \"63\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 0.5,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            }\n        ],\n        \"expired_at\": \"2026-12-31T22:22:25.333Z\",\n        \"hide_expiry_time\": true\n    },\n    \"checkout_experience\": {\n        \"payment_channels\": [\n            \"EWALLET_TNG\",\n            \"INTERNET_BANKING_FPX\"\n        ],\n        \"language\": \"EN\",\n        \"auto_redirect\": false,\n        \"retry_payment\": {\n            \"enabled\": true\n        },\n        \"callback_url\": \"https://merchant.host/payment/callback\",\n        \"callback_url_cancel\": \"https://young-thorn.biz/\",\n        \"callback_url_result\": \"https://dim-starboard.net/\"\n    },\n    \"metadata\": {\n        \"sample_key\": \"Sample Value\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"billing_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/v3/checkouts",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v3",
+                "checkouts"
+              ]
+            },
+            "description": "Generated from cURL: curl --location --request POST 'https://dev.your-api-server.com/v3/checkouts' \\\n--header 'Authorization: Base64(doku_ak_test_qblFNYngBkEdjEZ16jxxoWSM:)' \\\n--header 'Client-Id: BRN-001-0000001' \\\n--header 'Request-Timestamp: {{$date.isoTimestamp}}' \\\n--header 'Idempotency-Id;' \\\n--header 'Signature;' \\\n--header 'API-Version: arabica.2025-12-01' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"id\": \"8fdC56eo-cC99-46E1-B6AC-4asD8755B25C\",\n    \"order\": {\n        \"amount\": 100.05,\n        \"invoice_number\": \"INV-20210231-0001\",\n        \"currency\": \"MYR\"\n    }\n}'"
+          },
+          "response": [
+            {
+              "name": "200 - Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{basic_auth_sit_my2}}"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id_sit_my2}}"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}"
+                  },
+                  {
+                    "key": "Idempotency-Id",
+                    "value": "test"
+                  },
+                  {
+                    "key": "Signature",
+                    "value": "{{signature}}"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "2"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\": \"{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 10.05,\n        \"invoice_number\": \"INV-AD{{$timestamp}}\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"24\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 5.05,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            },\n            {\n                \"id\": \"63\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 5.00,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            }\n        ],\n        \"expired_at\": \"2025-12-03T22:22:25.333Z\"\n    },\n    \"checkout_experience\": {\n        \"channels\": [\n            \"EWALLET_TOUCHNGO\",\n            \"INTERNET_BANKING_FPX\",\n            \"EWALLET_GRABPAY\"\n        ],\n        \"language\": \"EN\",\n        \"auto_redirect\": true,\n        \"retry_payment\": {\n            \"enabled\": true,\n            \"max_attempts\": 3\n        },\n        \"recover_abondoned_cart\": {\n            \"enabled\": true,\n            \"max_recoveries\": 3\n        },\n        \"callback_url\": \"https://merchant.host/payment/callback\",\n        \"callback_url_cancel\": \"https://young-thorn.biz/\",\n        \"callback_url_result\": \"https://dim-starboard.net/\"\n    },\n\n    \"metadata\": {\n        \"sample_key\": \"your value\"\n    },\n    \"customer\": {\n        \"id\": \"cust-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"Estelle.Sporer5@yahoo.com\",\n        \"phone\": \"+737\",\n        \"country\": \"ID\",\n        \"address\": \"Street 6\"\n    },\n    \"device_info\": {\n        \"platform\": \"WEB\",\n        \"browser\": \"Chrome 91.0.4472.124\",\n        \"os\": \"Android 13\",\n        \"ip_address\": \"127.0.0.1\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/checkout/v3/checkouts",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "checkout",
+                    "v3",
+                    "checkouts"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 02 Dec 2025 04:25:49 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"1764649549466\",\n    \"order\": {\n        \"amount\": 10.05,\n        \"invoice_number\": \"INV-AD1764649549\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"24\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 5.05,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            },\n            {\n                \"id\": \"63\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 5,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            }\n        ],\n        \"expired_at\": \"2025-12-03T22:22:25.333Z\"\n    },\n    \"checkout_experience\": {\n        \"channels\": [\n            \"EWALLET_TOUCHNGO\",\n            \"INTERNET_BANKING_FPX\",\n            \"EWALLET_GRABPAY\"\n        ],\n        \"language\": \"EN\",\n        \"auto_redirect\": true,\n        \"retry_payment\": {\n            \"enabled\": true,\n            \"max_attempts\": 3\n        },\n        \"recover_abandoned_cart\": {\n            \"enabled\": false,\n            \"max_recoveries\": 3\n        },\n        \"callback_url\": \"https://merchant.host/payment/callback\",\n        \"callback_url_cancel\": \"https://young-thorn.biz/\",\n        \"callback_url_result\": \"https://dim-starboard.net/\"\n    },\n    \"payment\": {\n        \"checkout_url\": \"https://app-sit.doku.com/checkout-link-v3/6d67b937de494c3385b76277fb0bee5d20252502112549690\",\n        \"type\": \"SALE\",\n        \"status\": \"PENDING\",\n        \"state\": \"INIT\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Retrieve Checkout",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{basic_auth}}"
+              },
+              {
+                "key": "Client-Id",
+                "value": "{{client_id}}"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}"
+              },
+              {
+                "key": "API-Version",
+                "value": "arabica.2025-12-01"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/v3/checkouts/1769415651339",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v3",
+                "checkouts",
+                "1769415651339"
+              ]
+            },
+            "description": "Generated from cURL: curl --location 'https://api-sit.doku.com/v3/checkouts/1768276092408' \\\n--header 'Authorization: Basic YW55LWFwaS1rZXktMTIz' \\\n--header 'Client-Id: BRN-0204-1766128384799' \\\n--header 'Request-Timestamp: {{request_timestamp}}' \\\n--header 'API-Version: arabica.2025-12-01'"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payment API",
+      "item": [
+        {
+          "name": "Create Payment",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "function generateSignature(jsonBody) {",
+                  "    var digestSHA256 = CryptoJS.SHA256(jsonBody);",
+                  "    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+                  "    var signatureComponents =",
+                  "        pm.variables.get('client_id') +'\\n' +",
+                  "        pm.variables.get('request_timestamp') + '\\n'+",
+                  "        pm.variables.get('request_target') + '\\n'+",
+                  "        digestBase64;",
+                  "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents, pm.variables.get('secret_key'));",
+                  "    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+                  "    return 'HMACSHA256='+signatureBase64;",
+                  "}",
+                  "pm.variables.set('generatedRequestId', Date.now());",
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+                  "pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{basic_auth}}",
+                "type": "text"
+              },
+              {
+                "key": "Client-Id",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Signature",
+                "value": "{{signature}}",
+                "type": "text"
+              },
+              {
+                "key": "API-Version",
+                "value": "arabica.2025-12-01",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "file",
+              "file": {}
+            },
+            "url": {
+              "raw": "{{url}}/v3/payments",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v3",
+                "payments"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve Payment",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{basic_auth}}"
+              },
+              {
+                "key": "Client-Id",
+                "value": "{{client_id}}"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}"
+              },
+              {
+                "key": "API-Version",
+                "value": "arabica.2025-12-01"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/v3/payments/1768275476502",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v3",
+                "payments",
+                "1768275476502"
+              ]
+            },
+            "description": "Generated from cURL: curl --location 'https://api-sit.doku.com/v3/payments/1768275476502' \\\n--header 'Authorization: Basic YW55LWFwaS1rZXktMTIz' \\\n--header 'Client-Id: BRN-0204-1766128384799' \\\n--header 'Request-Timestamp: {{request_timestamp}}' \\\n--header 'API-Version: arabica.2025-12-01'"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "client_id",
+      "value": ""
+    },
+    {
+      "key": "secret_key",
+      "value": ""
+    },
+    {
+      "key": "basic_auth",
+      "value": ""
+    },
+    {
+      "key": "url",
+      "value": ""
+    }
+  ]
 }
