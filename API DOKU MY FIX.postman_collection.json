@@ -1,0 +1,506 @@
+{
+  "info": {
+    "_postman_id": "a222c056-a28d-4d34-97c7-5861ec924086",
+    "name": "DOKU MY API Collection",
+    "description": "**DOKU MY Postman Collection** is a collection of Postman requests designed to help developers explore, test, and integrate with **DOKU Malaysia (MY) APIs**.\n\nIt provides ready-to-use examples for key API flows, including authentication, checkout, and payment processing, allowing developers to quickly understand request structures, required parameters, and expected responses.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "42079928"
+  },
+  "item": [
+    {
+      "name": "Checkout API",
+      "item": [
+        {
+          "name": "Create Checkout",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set('generatedRequestId', Date.now());",
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Client-Id",
+                "value": "{{client_id}}"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}"
+              },
+              {
+                "key": "API-Version",
+                "value": "arabica.2025-12-01"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 2,\n        \"invoice_number\": \"INV-CHECKOUT-{{$timestamp}}\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"24\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 1,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            },\n            {\n                \"id\": \"63\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 1,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            }\n        ],\n        \"expired_at\": \"2026-12-31T22:22:25.333Z\",\n        \"hide_expiry_time\": true\n    },\n    \"checkout_experience\": {\n        \"payment_channels\": [\n            \"EWALLET_TNG\",\n            \"INTERNET_BANKING_FPX\"\n        ],\n        \"language\": \"EN\",\n        \"auto_redirect\": false,\n        \"retry_payment\": {\n            \"enabled\": true\n        },\n        \"callback_url\": \"https://merchant.host/payment/callback\",\n        \"callback_url_cancel\": \"https://young-thorn.biz/\",\n        \"callback_url_result\": \"https://dim-starboard.net/\"\n    },\n    \"metadata\": {\n        \"sample_key\": \"Sample Value\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"billing_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/v3/checkouts",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v3",
+                "checkouts"
+              ]
+            },
+            "description": "Generated from cURL: curl --location --request POST 'https://dev.your-api-server.com/v3/checkouts' \\\n--header 'Authorization: Base64(doku_ak_test_qblFNYngBkEdjEZ16jxxoWSM:)' \\\n--header 'Client-Id: BRN-001-0000001' \\\n--header 'Request-Timestamp: {{$date.isoTimestamp}}' \\\n--header 'Idempotency-Id;' \\\n--header 'Signature;' \\\n--header 'API-Version: arabica.2025-12-01' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"id\": \"8fdC56eo-cC99-46E1-B6AC-4asD8755B25C\",\n    \"order\": {\n        \"amount\": 100.05,\n        \"invoice_number\": \"INV-20210231-0001\",\n        \"currency\": \"MYR\"\n    }\n}'"
+          },
+          "response": [
+            {
+              "name": "200 - Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{basic_auth_sit_my2}}"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id_sit_my2}}"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}"
+                  },
+                  {
+                    "key": "Idempotency-Id",
+                    "value": "test"
+                  },
+                  {
+                    "key": "Signature",
+                    "value": "{{signature}}"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "2"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\": \"{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 10.05,\n        \"invoice_number\": \"INV-AD{{$timestamp}}\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"24\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 5.05,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            },\n            {\n                \"id\": \"63\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 5.00,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            }\n        ],\n        \"expired_at\": \"2025-12-03T22:22:25.333Z\"\n    },\n    \"checkout_experience\": {\n        \"channels\": [\n            \"EWALLET_TOUCHNGO\",\n            \"INTERNET_BANKING_FPX\",\n            \"EWALLET_GRABPAY\"\n        ],\n        \"language\": \"EN\",\n        \"auto_redirect\": true,\n        \"retry_payment\": {\n            \"enabled\": true,\n            \"max_attempts\": 3\n        },\n        \"recover_abondoned_cart\": {\n            \"enabled\": true,\n            \"max_recoveries\": 3\n        },\n        \"callback_url\": \"https://merchant.host/payment/callback\",\n        \"callback_url_cancel\": \"https://young-thorn.biz/\",\n        \"callback_url_result\": \"https://dim-starboard.net/\"\n    },\n\n    \"metadata\": {\n        \"sample_key\": \"your value\"\n    },\n    \"customer\": {\n        \"id\": \"cust-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"Estelle.Sporer5@yahoo.com\",\n        \"phone\": \"+737\",\n        \"country\": \"ID\",\n        \"address\": \"Street 6\"\n    },\n    \"device_info\": {\n        \"platform\": \"WEB\",\n        \"browser\": \"Chrome 91.0.4472.124\",\n        \"os\": \"Android 13\",\n        \"ip_address\": \"127.0.0.1\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/checkout/v3/checkouts",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "checkout",
+                    "v3",
+                    "checkouts"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 02 Dec 2025 04:25:49 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"1764649549466\",\n    \"order\": {\n        \"amount\": 10.05,\n        \"invoice_number\": \"INV-AD1764649549\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"24\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 5.05,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            },\n            {\n                \"id\": \"63\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 5,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            }\n        ],\n        \"expired_at\": \"2025-12-03T22:22:25.333Z\"\n    },\n    \"checkout_experience\": {\n        \"channels\": [\n            \"EWALLET_TOUCHNGO\",\n            \"INTERNET_BANKING_FPX\",\n            \"EWALLET_GRABPAY\"\n        ],\n        \"language\": \"EN\",\n        \"auto_redirect\": true,\n        \"retry_payment\": {\n            \"enabled\": true,\n            \"max_attempts\": 3\n        },\n        \"recover_abandoned_cart\": {\n            \"enabled\": false,\n            \"max_recoveries\": 3\n        },\n        \"callback_url\": \"https://merchant.host/payment/callback\",\n        \"callback_url_cancel\": \"https://young-thorn.biz/\",\n        \"callback_url_result\": \"https://dim-starboard.net/\"\n    },\n    \"payment\": {\n        \"checkout_url\": \"https://app-sit.doku.com/checkout-link-v3/6d67b937de494c3385b76277fb0bee5d20252502112549690\",\n        \"type\": \"SALE\",\n        \"status\": \"PENDING\",\n        \"state\": \"INIT\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Retrieve Checkout",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Client-Id",
+                "value": "{{client_id}}"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}"
+              },
+              {
+                "key": "API-Version",
+                "value": "arabica.2025-12-01"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/v3/checkouts/ID-1769532139929",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v3",
+                "checkouts",
+                "ID-1769532139929"
+              ]
+            },
+            "description": "Generated from cURL: curl --location 'https://api-sit.doku.com/v3/checkouts/1768276092408' \\\n--header 'Authorization: Basic YW55LWFwaS1rZXktMTIz' \\\n--header 'Client-Id: BRN-0204-1766128384799' \\\n--header 'Request-Timestamp: {{request_timestamp}}' \\\n--header 'API-Version: arabica.2025-12-01'"
+          },
+          "response": []
+        }
+      ],
+      "description": "Checkout is a payment service that allows you as DOKU merchants to use our payment system, where DOKU's payment page pops up on your website after checkout. This is the easiest and the quickest way to integrate with DOKU without any hassles that suitable for every business needs from small businesses to enterprises.  \n  \nLearn more [here](https://doku-developers.apidog.io/overview-1926303m0)."
+    },
+    {
+      "name": "Payment API",
+      "item": [
+        {
+          "name": "Create Payment",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "function generateSignature(jsonBody) {",
+                  "    var digestSHA256 = CryptoJS.SHA256(jsonBody);",
+                  "    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+                  "    var signatureComponents =",
+                  "        pm.variables.get('client_id') +'\\n' +",
+                  "        pm.variables.get('request_timestamp') + '\\n'+",
+                  "        '/v3/payments' + '\\n'+",
+                  "        digestBase64;",
+                  "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents, pm.variables.get('secret_key'));",
+                  "    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+                  "    return 'HMACSHA256='+signatureBase64;",
+                  "}",
+                  "pm.variables.set('generatedRequestId', Date.now());",
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+                  "pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{api_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Client-Id",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Signature",
+                "value": "{{signature}}",
+                "type": "text"
+              },
+              {
+                "key": "API-Version",
+                "value": "arabica.2025-12-01",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-{{$timestamp}}\",\n        \"expired_at\": \"2026-09-17T07:30:45Z\",\n        \"line_items\": [\n            {\n                \"id\": 1,\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ]\n    },\n    \"payment\": {\n        \"channel\": \"INTERNET_BANKING_FPX\",\n        \"callback_url\": \"https://merchant-callback-url.com\",\n        \"business_model\": \"B2C\",\n        \"bank_code\": \"ABB0233\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"billing_address\": {\n         \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    }\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/v3/payments",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v3",
+                "payments"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Bank List - FPX",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "function generateSignature(jsonBody) {",
+                  "    var digestSHA256 = CryptoJS.SHA256(jsonBody);",
+                  "    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+                  "    var signatureComponents =",
+                  "        pm.variables.get('client_id') +'\\n' +",
+                  "        pm.variables.get('request_timestamp') + '\\n'+",
+                  "        '/v3/payments/internet-banking/banks' + '\\n' +",
+                  "        digestBase64;",
+                  "",
+                  "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents, pm.variables.get('secret_key'));",
+                  "    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+                  "    return 'HMACSHA256='+signatureBase64;",
+                  "}",
+                  "",
+                  "pm.variables.set('generatedRequestId', Date.now());",
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+                  "pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Client-Id",
+                "value": "{{client_id}}"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}"
+              },
+              {
+                "key": "Signature",
+                "value": "{{signature}}"
+              },
+              {
+                "key": "API-version",
+                "value": "arabica.2025-06-19"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"payment_channel\": \"INTERNET_BANKING_FPX\",\n    \"type\": \"B2C\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/v3/payments/internet-banking/banks",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v3",
+                "payments",
+                "internet-banking",
+                "banks"
+              ]
+            },
+            "description": "Generated from cURL: curl --location 'https://api-doku.com/v3/payments/internet-banking/banks' \\\n--header 'api-version: arabica.2025-06-19' \\\n--header 'Request-Target: {{request_target}}' \\\n--header 'Request-Timestamp: {{request_timestamp}}' \\\n--header 'Signature: {{signature}}' \\\n--header 'Idempotency-Id: test' \\\n--header 'Authorization: Basic dGVzdC1hcGktbWVueWFsYWFhYWEtMTIz' \\\n--header 'Client-Id: BRN-0216-1758091011041' \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"payment_channel\": \"INTERNET_BANKING_FPX\"\n}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve Payment",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Client-Id",
+                "value": "{{client_id}}"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}"
+              },
+              {
+                "key": "API-Version",
+                "value": "arabica.2025-12-01"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/v3/payments/ID-1769533523010",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v3",
+                "payments",
+                "ID-1769533523010"
+              ]
+            },
+            "description": "Generated from cURL: curl --location 'https://api-sit.doku.com/v3/payments/1768275476502' \\\n--header 'Authorization: Basic YW55LWFwaS1rZXktMTIz' \\\n--header 'Client-Id: BRN-0204-1766128384799' \\\n--header 'Request-Timestamp: {{request_timestamp}}' \\\n--header 'API-Version: arabica.2025-12-01'"
+          },
+          "response": []
+        }
+      ],
+      "description": "The Payment API is a unified direct payment API that supports multiple payment channels through a single endpoint. Merchants specify the desired payment channel in the request payload, allowing full customization of the payment flow and user experience.  \n  \nLearn more [here](https://doku-developers.apidog.io/overview-1926304m0)."
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "client_id",
+      "value": ""
+    },
+    {
+      "key": "secret_key",
+      "value": ""
+    },
+    {
+      "key": "api_key",
+      "value": ""
+    },
+    {
+      "key": "url",
+      "value": ""
+    }
+  ]
+}
