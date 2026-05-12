@@ -1,8 +1,8 @@
 {
   "info": {
     "_postman_id": "a222c056-a28d-4d34-97c7-5861ec924086",
-    "name": "DOKU MY API Collection",
-    "description": "**DOKU MY Postman Collection** is a collection of Postman requests designed to help developers explore, test, and integrate with **DOKU Malaysia (MY) APIs**.\n\nIt provides ready-to-use examples for key API flows, including authentication, checkout, and payment processing, allowing developers to quickly understand request structures, required parameters, and expected responses.",
+    "name": "DOKU Malaysia API Collection",
+    "description": "**DOKU Malaysia Postman Collection** is a collection of Postman requests designed to help developers explore, test, and integrate with **DOKU Malaysia APIs**.\n\nIt provides ready-to-use examples for key API flows, including authentication, checkout, and payment processing, allowing developers to quickly understand request structures, required parameters, and expected responses.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "42079928"
   },
@@ -43,11 +43,11 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "{{api_key}}"
+                "value": "{{api_key_sandbox}}"
               },
               {
                 "key": "Client-Id",
-                "value": "{{client_id}}"
+                "value": "{{client_id_sandbox}}"
               },
               {
                 "key": "Request-Timestamp",
@@ -60,7 +60,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 2,\n        \"invoice_number\": \"INV-CHECKOUT-{{$timestamp}}\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"24\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 1,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            },\n            {\n                \"id\": \"63\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 1,\n                \"price\": 1,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            }\n        ],\n        \"expired_at\": \"2026-12-31T22:22:25.333Z\",\n        \"hide_expiry_time\": true\n    },\n    \"checkout_experience\": {\n        \"payment_channels\": [\n            \"EWALLET_TNG\",\n            \"INTERNET_BANKING_FPX\"\n        ],\n        \"language\": \"EN\",\n        \"auto_redirect\": false,\n        \"retry_payment\": {\n            \"enabled\": true\n        },\n        \"callback_url\": \"https://merchant.host/payment/callback\",\n        \"callback_url_cancel\": \"https://young-thorn.biz/\",\n        \"callback_url_result\": \"https://dim-starboard.net/\"\n    },\n    \"metadata\": {\n        \"sample_key\": \"Sample Value\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"billing_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    }\n}",
+              "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 10,\n        \"invoice_number\": \"INV-CHECKOUT-{{$timestamp}}\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"24\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 8,\n                \"price\": 1,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            },\n            {\n                \"id\": \"63\",\n                \"name\": \"Fresh flowers\",\n                \"quantity\": 2,\n                \"price\": 1,\n                \"sku\": \"FF01\",\n                \"category\": \"gift-and-flowers\"\n            }\n        ],\n        \"expired_at\": \"2026-12-31T22:22:25.333Z\"\n    },\n    \"checkout_experience\": {\n        \"language\": \"MS\",\n        \"auto_redirect\": false,\n        \"retry_payment\": {\n            \"enabled\": true\n        },\n        \"callback_url\": \"https://www.youtube.com/\",\n        \"callback_url_cancel\": \"https://www.facebook.com/\",\n        \"callback_url_result\": \"https://www.instagram.com/\"\n    },\n    \"metadata\": {\n        \"sample_key\": \"Graduation Flowers\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"Tectona Grandis\",\n        \"email\": \"tectona.grandis@doku.com\",\n        \"phone\": \"+6282114728728\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -193,11 +193,11 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "{{api_key}}"
+                "value": "{{api_key_sandbox}}"
               },
               {
                 "key": "Client-Id",
-                "value": "{{client_id}}"
+                "value": "{{client_id_sandbox}}"
               },
               {
                 "key": "Request-Timestamp",
@@ -209,14 +209,14 @@
               }
             ],
             "url": {
-              "raw": "{{url}}/v3/checkouts/ID-1769532139929",
+              "raw": "{{url}}/v3/checkouts/ID-1777388781981",
               "host": [
                 "{{url}}"
               ],
               "path": [
                 "v3",
                 "checkouts",
-                "ID-1769532139929"
+                "ID-1777388781981"
               ]
             },
             "description": "Generated from cURL: curl --location 'https://api-sit.doku.com/v3/checkouts/1768276092408' \\\n--header 'Authorization: Basic YW55LWFwaS1rZXktMTIz' \\\n--header 'Client-Id: BRN-0204-1766128384799' \\\n--header 'Request-Timestamp: {{request_timestamp}}' \\\n--header 'API-Version: arabica.2025-12-01'"
@@ -240,11 +240,11 @@
                   "    var digestSHA256 = CryptoJS.SHA256(jsonBody);",
                   "    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
                   "    var signatureComponents =",
-                  "        pm.variables.get('client_id') +'\\n' +",
+                  "        pm.variables.get('client_id_sandbox') +'\\n' +",
                   "        pm.variables.get('request_timestamp') + '\\n'+",
                   "        '/v3/payments' + '\\n'+",
                   "        digestBase64;",
-                  "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents, pm.variables.get('secret_key'));",
+                  "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents, pm.variables.get('secret_key_sandbox'));",
                   "    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
                   "    return 'HMACSHA256='+signatureBase64;",
                   "}",
@@ -274,12 +274,12 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "{{api_key}}",
+                "value": "{{api_key_sandbox}}",
                 "type": "text"
               },
               {
                 "key": "Client-Id",
-                "value": "{{client_id}}",
+                "value": "{{client_id_sandbox}}",
                 "type": "text"
               },
               {
@@ -300,7 +300,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-{{$timestamp}}\",\n        \"expired_at\": \"2026-09-17T07:30:45Z\",\n        \"line_items\": [\n            {\n                \"id\": 1,\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ]\n    },\n    \"payment\": {\n        \"channel\": \"INTERNET_BANKING_FPX\",\n        \"callback_url\": \"https://merchant-callback-url.com\",\n        \"business_model\": \"B2C\",\n        \"bank_code\": \"ABB0233\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"billing_address\": {\n         \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    }\n}\n",
+              "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-{{$timestamp}}\",\n        \"expired_at\": \"2026-09-17T07:30:45Z\",\n        \"line_items\": [\n            {\n                \"id\": 1,\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ]\n    },\n    \"payment\": {\n        \"channel\": \"EWALLET_TNG\",\n        \"business_model\": \"B2C\",\n        \"bank_code\": \"ABB0233\",\n        \"callback_url\": \"https://doku.com\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    }\n}\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -325,7 +325,538 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Create Payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Signature",
+                    "value": "{{signature}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "arabica.2025-12-01",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-{{$timestamp}}\",\n        \"expired_at\": \"2026-09-17T07:30:45Z\",\n        \"line_items\": [\n            {\n                \"id\": 1,\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ]\n    },\n    \"payment\": {\n        \"channel\": \"INTERNET_BANKING_FPX\",\n        \"bank_code\": \"MB2U0227\",\n        \"business_model\": \"B2C\",\n        \"callback_url\": \"https://doku.com\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"billing_address\": {\n         \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/v3/payments",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "payments"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Client-Id",
+                  "value": "BRN-0207-1770620751708"
+                },
+                {
+                  "key": "Response-Timestamp",
+                  "value": "2026-02-10T02:41:31Z"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Basic ZG9rdV9rZXlfYTI1M2U0NDc2MWU3NGI5NGJmYjE4YzViY2VhNGRhYWM="
+                },
+                {
+                  "key": "API-Version",
+                  "value": "arabica.2025-12-01"
+                },
+                {
+                  "key": "Signature",
+                  "value": "HMACSHA256=Npntt/GyYi8qPyjoPE6Mj1k5YgWkhsfREa2SaugBht4="
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Feb 2026 02:41:31 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1113"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"ID-1770691289984\",\n    \"order\": {\n        \"amount\": 2,\n        \"invoice_number\": \"INV-PAYMENT-1770691290\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"1\",\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ],\n        \"expired_at\": \"2026-09-17T07:30:45Z\"\n    },\n    \"payment\": {\n        \"channel\": \"INTERNET_BANKING_FPX\",\n        \"type\": \"SALE\",\n        \"initiation_type\": \"customer_initiate\",\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"status\": \"PENDING\",\n        \"state\": \"INITIATE\",\n        \"doku_reference_id\": \"019c456ce7507ad3a8c6ef7c061fb3bf\",\n        \"next_action\": {\n            \"required\": true,\n            \"type\": \"auth_redirection\",\n            \"url\": \"https://api.senangpay.my/my/payment-perform?clientId=BRN-0207-1770620751708&referenceId=ODVkODAyOWVlOTZjOGIxNmIwYTUwM2ZhNTBjNGZlYTE2YzY3YmVmOGNiMmMxNThlZTBlNDQyYmE2NjRkNWU5YzEyZGE3YmMzYWYwYWFjOTg1ZDJiNTE1YWQyZWQ4NzViODVhZThlZjEzMjU0OWIzOTU3N2Y0MmYxOWY2OGJmNzk=\"\n        },\n        \"business_model\": \"B2C\",\n        \"bank_code\": \"MB2U0227\",\n        \"callback_url\": \"https://doku.com\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    }\n}"
+            },
+            {
+              "name": "Create Payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Signature",
+                    "value": "{{signature}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "arabica.2025-12-01",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-{{$timestamp}}\",\n        \"expired_at\": \"2026-09-17T07:30:45Z\",\n        \"line_items\": [\n            {\n                \"id\": 1,\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ]\n    },\n    \"payment\": {\n        \"channel\": \"BNPL_SHOPEEPAY\",\n        \"callback_url\": \"https://doku.com\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"billing_address\": {\n         \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/v3/payments",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "payments"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Client-Id",
+                  "value": "BRN-0207-1770620751708"
+                },
+                {
+                  "key": "Response-Timestamp",
+                  "value": "2026-02-10T03:50:32Z"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Basic ZG9rdV9rZXlfYTI1M2U0NDc2MWU3NGI5NGJmYjE4YzViY2VhNGRhYWM="
+                },
+                {
+                  "key": "API-Version",
+                  "value": "arabica.2025-12-01"
+                },
+                {
+                  "key": "Signature",
+                  "value": "HMACSHA256=hmaZ9bJ1pgWAei1DvpW4AmArTy6gjm2Gp/PsMFd6IGw="
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Feb 2026 03:50:32 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1061"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"ID-1770695430949\",\n    \"order\": {\n        \"amount\": 2,\n        \"invoice_number\": \"INV-PAYMENT-1770695431\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"1\",\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ],\n        \"expired_at\": \"2026-09-17T07:30:45Z\"\n    },\n    \"payment\": {\n        \"channel\": \"BNPL_SHOPEEPAY\",\n        \"type\": \"SALE\",\n        \"initiation_type\": \"customer_initiate\",\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"status\": \"PENDING\",\n        \"state\": \"INITIATE\",\n        \"doku_reference_id\": \"019c45ac15d073f885330a259e42a7b3\",\n        \"next_action\": {\n            \"required\": true,\n            \"type\": \"auth_redirection\",\n            \"url\": \"https://api.senangpay.my/my/payment-perform?clientId=BRN-0207-1770620751708&referenceId=ZTA0YjlmOWYwOWZiYTRkYmI0MzNhN2ViYzY5NGEwZDliM2YzODQyNGExODFjNDU1MDJkYTNmODAyYjc2ZGI1NGI4YzEzMzgxNTllN2Y3YWRjOWYwZTE3ZjI1MTRkOWI0YTUxZTFhM2Y5ZjczZmE2NmZhY2JjMzczY2E2YjRlYmE=\"\n        },\n        \"callback_url\": \"https://doku.com\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    }\n}"
+            },
+            {
+              "name": "Create Payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Signature",
+                    "value": "{{signature}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "arabica.2025-12-01",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-{{$timestamp}}\",\n        \"expired_at\": \"2026-09-17T07:30:45Z\",\n        \"line_items\": [\n            {\n                \"id\": 1,\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ]\n    },\n    \"payment\": {\n        \"channel\": \"EWALLET_SHOPEEPAY\",\n        \"callback_url\": \"https://doku.com\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"billing_address\": {\n         \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/v3/payments",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "payments"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Client-Id",
+                  "value": "BRN-0207-1770620751708"
+                },
+                {
+                  "key": "Response-Timestamp",
+                  "value": "2026-02-10T04:15:56Z"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Basic ZG9rdV9rZXlfYTI1M2U0NDc2MWU3NGI5NGJmYjE4YzViY2VhNGRhYWM="
+                },
+                {
+                  "key": "API-Version",
+                  "value": "arabica.2025-12-01"
+                },
+                {
+                  "key": "Signature",
+                  "value": "HMACSHA256=At583JrSY2y9fMgblsrMXU+a4j8wIb6/ZgP/3rZQQM8="
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Feb 2026 04:15:56 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1064"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"ID-1770696954975\",\n    \"order\": {\n        \"amount\": 2,\n        \"invoice_number\": \"INV-PAYMENT-1770696955\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"1\",\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ],\n        \"expired_at\": \"2026-09-17T07:30:45Z\"\n    },\n    \"payment\": {\n        \"channel\": \"EWALLET_SHOPEEPAY\",\n        \"type\": \"SALE\",\n        \"initiation_type\": \"customer_initiate\",\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"status\": \"PENDING\",\n        \"state\": \"INITIATE\",\n        \"doku_reference_id\": \"019c45c35846737e953da1045dd88ef7\",\n        \"next_action\": {\n            \"required\": true,\n            \"type\": \"auth_redirection\",\n            \"url\": \"https://api.senangpay.my/my/payment-perform?clientId=BRN-0207-1770620751708&referenceId=MWQ3MTZiZTdlYjBmMTYyNTU1ZWQzNzNlYWYwYTdiODIxZGY5OTA2YzIzNjM3ZDI4OWFlNmRkNmNkNTk5NWI3OGQ5ZTI3ZmZlOTAxNGU4ZWQ2MDBkOGUzYWU1MjQzOWZhMjdhZTYwMDdiYzZiMDg1NDQ0M2ZhMzk1YTQ0YzY0Nzk=\"\n        },\n        \"callback_url\": \"https://doku.com\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    }\n}"
+            },
+            {
+              "name": "Create Payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Signature",
+                    "value": "{{signature}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "arabica.2025-12-01",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-{{$timestamp}}\",\n        \"expired_at\": \"2026-09-17T07:30:45Z\",\n        \"line_items\": [\n            {\n                \"id\": 1,\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ]\n    },\n    \"payment\": {\n        \"channel\": \"EWALLET_TNG\",\n        \"callback_url\": \"https://doku.com\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"billing_address\": {\n         \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/v3/payments",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "payments"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Client-Id",
+                  "value": "BRN-0207-1770620751708"
+                },
+                {
+                  "key": "Response-Timestamp",
+                  "value": "2026-02-10T04:29:23Z"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Basic ZG9rdV9rZXlfYTI1M2U0NDc2MWU3NGI5NGJmYjE4YzViY2VhNGRhYWM="
+                },
+                {
+                  "key": "API-Version",
+                  "value": "arabica.2025-12-01"
+                },
+                {
+                  "key": "Signature",
+                  "value": "HMACSHA256=d9Ho6t8/rDKvpUGccyW0XQbFZCmVRNw/cP0LvCRD1zI="
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Feb 2026 04:29:23 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1058"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"ID-1770697761301\",\n    \"order\": {\n        \"amount\": 2,\n        \"invoice_number\": \"INV-PAYMENT-1770697761\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"1\",\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ],\n        \"expired_at\": \"2026-09-17T07:30:45Z\"\n    },\n    \"payment\": {\n        \"channel\": \"EWALLET_TNG\",\n        \"type\": \"SALE\",\n        \"initiation_type\": \"customer_initiate\",\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"status\": \"PENDING\",\n        \"state\": \"INITIATE\",\n        \"doku_reference_id\": \"019c45cfa742792c964dd0f99c51b740\",\n        \"next_action\": {\n            \"required\": true,\n            \"type\": \"auth_redirection\",\n            \"url\": \"https://api.senangpay.my/my/payment-perform?clientId=BRN-0207-1770620751708&referenceId=YmQ3ZDJkNzA1NGFmOWQzYzYzOTlhYmU5OWFlZTVlYmQ5ZTY0ZjEwNzFhOWUzMDY2ZWM5NTk4ZmZlZjY1Njg0MzIzZTY4NjQxZmYzMDM1MWUzYjFkYzk5Zjc0ZmE3ZWU1YjIzYjRlYTExMmE1NzY0YzNhY2I1Mzg4MjFjZWUxMmQ=\"\n        },\n        \"callback_url\": \"https://doku.com\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    }\n}"
+            },
+            {
+              "name": "Create Payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Signature",
+                    "value": "{{signature}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "arabica.2025-12-01",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\": \"ID-{{generatedRequestId}}\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-{{$timestamp}}\",\n        \"expired_at\": \"2026-09-17T07:30:45Z\",\n        \"line_items\": [\n            {\n                \"id\": 1,\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ]\n    },\n    \"payment\": {\n        \"channel\": \"EWALLET_GRABPAY\",\n        \"callback_url\": \"https://doku.com\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"billing_address\": {\n         \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"address\": \"123 Main Street, Apartment 4B\",\n        \"city\": \"Kuala Lumpur\",\n        \"postal_code\": \"12345\",\n        \"phone\": \"+6082334455\",\n        \"country_code\": \"MY\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/v3/payments",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "payments"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Client-Id",
+                  "value": "BRN-0207-1770620751708"
+                },
+                {
+                  "key": "Response-Timestamp",
+                  "value": "2026-02-10T04:32:04Z"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Basic ZG9rdV9rZXlfYTI1M2U0NDc2MWU3NGI5NGJmYjE4YzViY2VhNGRhYWM="
+                },
+                {
+                  "key": "API-Version",
+                  "value": "arabica.2025-12-01"
+                },
+                {
+                  "key": "Signature",
+                  "value": "HMACSHA256=FUJgMplnEqSJf5sXDlg+kCJXqdyHy/+sO01FN9ZbjnE="
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Feb 2026 04:32:04 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1062"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"ID-1770697924204\",\n    \"order\": {\n        \"amount\": 2,\n        \"invoice_number\": \"INV-PAYMENT-1770697924\",\n        \"currency\": \"MYR\",\n        \"line_items\": [\n            {\n                \"id\": \"1\",\n                \"name\": \"Chitato\",\n                \"quantity\": 2,\n                \"price\": 1\n            }\n        ],\n        \"expired_at\": \"2026-09-17T07:30:45Z\"\n    },\n    \"payment\": {\n        \"channel\": \"EWALLET_GRABPAY\",\n        \"type\": \"SALE\",\n        \"initiation_type\": \"customer_initiate\",\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"status\": \"PENDING\",\n        \"state\": \"INITIATE\",\n        \"doku_reference_id\": \"019c45d21f9b70c1976265639c7592b4\",\n        \"next_action\": {\n            \"required\": true,\n            \"type\": \"auth_redirection\",\n            \"url\": \"https://api.senangpay.my/my/payment-perform?clientId=BRN-0207-1770620751708&referenceId=ZGRjOWYxMWU1ZTA1MjljZDBmOWQwODczMDhmNDUxY2E0ODFhNjM3MjA3ZjU5ODU1NzM1YTUyM2I4NWVjOTNhMDkwZGZkMDkzMjM2NmM5NDRjMWYxOGRkOGRjNDU4ODg4ZTdkNmI3YzkyNzYyYmY5Y2ZiMDk3NDdjODBiYWJlYzY=\"\n        },\n        \"callback_url\": \"https://doku.com\"\n    },\n    \"metadata\": {\n        \"key_1\": \"value_1\",\n        \"key_2\": \"value_2\",\n        \"key_3\": \"value_3\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"customer_email@test.com\",\n        \"phone\": \"+60812345678\",\n        \"country\": \"MY\",\n        \"address\": \"Street 1\"\n    },\n    \"device_info\": {\n        \"platform\": \"web\",\n        \"browser\": \"chrome\",\n        \"os\": \"Machintos\"\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Get Bank List - FPX",
@@ -338,12 +869,12 @@
                   "    var digestSHA256 = CryptoJS.SHA256(jsonBody);",
                   "    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
                   "    var signatureComponents =",
-                  "        pm.variables.get('client_id') +'\\n' +",
+                  "        pm.variables.get('client_id_sandbox') +'\\n' +",
                   "        pm.variables.get('request_timestamp') + '\\n'+",
                   "        '/v3/payments/internet-banking/banks' + '\\n' +",
                   "        digestBase64;",
                   "",
-                  "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents, pm.variables.get('secret_key'));",
+                  "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents, pm.variables.get('secret_key_sandbox'));",
                   "    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
                   "    return 'HMACSHA256='+signatureBase64;",
                   "}",
@@ -363,11 +894,11 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "{{api_key}}"
+                "value": "{{api_key_sandbox}}"
               },
               {
                 "key": "Client-Id",
-                "value": "{{client_id}}"
+                "value": "{{client_id_sandbox}}"
               },
               {
                 "key": "Request-Timestamp",
@@ -427,11 +958,11 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "{{api_key}}"
+                "value": "{{api_key_sandbox}}"
               },
               {
                 "key": "Client-Id",
-                "value": "{{client_id}}"
+                "value": "{{client_id_sandbox}}"
               },
               {
                 "key": "Request-Timestamp",
@@ -443,22 +974,2035 @@
               }
             ],
             "url": {
-              "raw": "{{url}}/v3/payments/ID-1769533523010",
+              "raw": "{{url}}/v3/payments/ID-1777390230219",
               "host": [
                 "{{url}}"
               ],
               "path": [
                 "v3",
                 "payments",
-                "ID-1769533523010"
+                "ID-1777390230219"
               ]
             },
             "description": "Generated from cURL: curl --location 'https://api-sit.doku.com/v3/payments/1768275476502' \\\n--header 'Authorization: Basic YW55LWFwaS1rZXktMTIz' \\\n--header 'Client-Id: BRN-0204-1766128384799' \\\n--header 'Request-Timestamp: {{request_timestamp}}' \\\n--header 'API-Version: arabica.2025-12-01'"
           },
-          "response": []
+          "response": [
+            {
+              "name": "Retrieve Payment",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id}}"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "arabica.2025-12-01"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/v3/payments/ID-1770691289984",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "payments",
+                    "ID-1770691289984"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "657"
+                },
+                {
+                  "key": "Client-Id",
+                  "value": "BRN-0207-1770620751708"
+                },
+                {
+                  "key": "Response-Timestamp",
+                  "value": "2026-02-10T03:22:31Z"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Basic ZG9rdV9rZXlfYTI1M2U0NDc2MWU3NGI5NGJmYjE4YzViY2VhNGRhYWM="
+                },
+                {
+                  "key": "API-Version",
+                  "value": "arabica.2025-12-01"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Feb 2026 03:22:31 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"metadata\": {\n        \"key_3\": \"value_3\",\n        \"key_2\": \"value_2\",\n        \"key_1\": \"value_1\"\n    },\n    \"reference_id\": \"019c456ce7507ad3a8c6ef7c061fb3bf\",\n    \"payment\": {\n        \"bank_code\": \"MB2U0227\",\n        \"amount\": 2,\n        \"channel\": \"INTERNET_BANKING_FPX\",\n        \"currency\": \"MYR\",\n        \"state\": \"COMPLETED\",\n        \"type\": \"PAYMENT\",\n        \"acquirer\": {\n            \"name\": \"AmBank\",\n            \"id\": \"AMBB\"\n        },\n        \"business_model\": \"B2C\",\n        \"processor\": {\n            \"approval_code\": \"2602101042370262\",\n            \"response_code\": \"00\"\n        },\n        \"status\": \"SUCCESS\"\n    },\n    \"id\": \"ID-1770691289984\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-1770691290\"\n    },\n    \"customer\": {\n        \"country\": \"MY\",\n        \"address\": \"Street 1\",\n        \"phone\": \"+60812345678\",\n        \"name\": \"John Doe\",\n        \"id\": \"DOKU-CUST-001\",\n        \"email\": \"customer_email@test.com\"\n    }\n}"
+            },
+            {
+              "name": "Retrieve Payment",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id}}"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "arabica.2025-12-01"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/v3/payments/ID-1770691141110",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "payments",
+                    "ID-1770691141110"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "573"
+                },
+                {
+                  "key": "Client-Id",
+                  "value": "BRN-0207-1770620751708"
+                },
+                {
+                  "key": "Response-Timestamp",
+                  "value": "2026-02-10T03:23:31Z"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Basic ZG9rdV9rZXlfYTI1M2U0NDc2MWU3NGI5NGJmYjE4YzViY2VhNGRhYWM="
+                },
+                {
+                  "key": "API-Version",
+                  "value": "arabica.2025-12-01"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Feb 2026 03:23:31 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"metadata\": {\n        \"key_3\": \"value_3\",\n        \"key_2\": \"value_2\",\n        \"key_1\": \"value_1\"\n    },\n    \"reference_id\": \"019c456aa31f74e5a5380c4c7b1576f8\",\n    \"payment\": {\n        \"amount\": 10.5,\n        \"channel\": \"BNPL_GRABPAY\",\n        \"currency\": \"MYR\",\n        \"state\": \"COMPLETED\",\n        \"type\": \"PAYMENT\",\n        \"acquirer\": {\n            \"name\": \"GRAB\",\n            \"id\": \"GRAB\"\n        },\n        \"processor\": {\n            \"response_code\": \"success\"\n        },\n        \"status\": \"SUCCESS\"\n    },\n    \"id\": \"ID-1770691141110\",\n    \"order\": {\n        \"amount\": 10.5,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-1770691141\"\n    },\n    \"customer\": {\n        \"country\": \"MY\",\n        \"address\": \"Street 1\",\n        \"phone\": \"+60812345678\",\n        \"name\": \"John Doe\",\n        \"id\": \"DOKU-CUST-001\",\n        \"email\": \"customer_email@test.com\"\n    }\n}"
+            },
+            {
+              "name": "Retrieve Payment",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id}}"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "arabica.2025-12-01"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/v3/payments/ID-1770697924204",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "payments",
+                    "ID-1770697924204"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "574"
+                },
+                {
+                  "key": "Client-Id",
+                  "value": "BRN-0207-1770620751708"
+                },
+                {
+                  "key": "Response-Timestamp",
+                  "value": "2026-02-10T04:38:02Z"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Basic ZG9rdV9rZXlfYTI1M2U0NDc2MWU3NGI5NGJmYjE4YzViY2VhNGRhYWM="
+                },
+                {
+                  "key": "API-Version",
+                  "value": "arabica.2025-12-01"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Feb 2026 04:38:02 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"metadata\": {\n        \"key_3\": \"value_3\",\n        \"key_2\": \"value_2\",\n        \"key_1\": \"value_1\"\n    },\n    \"reference_id\": \"019c45d21f9b70c1976265639c7592b4\",\n    \"payment\": {\n        \"amount\": 2,\n        \"channel\": \"EWALLET_GRABPAY\",\n        \"currency\": \"MYR\",\n        \"state\": \"COMPLETED\",\n        \"type\": \"PAYMENT\",\n        \"acquirer\": {\n            \"name\": \"GRAB\",\n            \"id\": \"GRAB\"\n        },\n        \"processor\": {\n            \"response_code\": \"success\"\n        },\n        \"status\": \"SUCCESS\"\n    },\n    \"id\": \"ID-1770697924204\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-1770697924\"\n    },\n    \"customer\": {\n        \"country\": \"MY\",\n        \"address\": \"Street 1\",\n        \"phone\": \"+60812345678\",\n        \"name\": \"John Doe\",\n        \"id\": \"DOKU-CUST-001\",\n        \"email\": \"customer_email@test.com\"\n    }\n}"
+            },
+            {
+              "name": "Retrieve Payment",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id}}"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "arabica.2025-12-01"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/v3/payments/ID-1770696954975",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "payments",
+                    "ID-1770696954975"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "574"
+                },
+                {
+                  "key": "Client-Id",
+                  "value": "BRN-0207-1770620751708"
+                },
+                {
+                  "key": "Response-Timestamp",
+                  "value": "2026-02-10T04:38:38Z"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Basic ZG9rdV9rZXlfYTI1M2U0NDc2MWU3NGI5NGJmYjE4YzViY2VhNGRhYWM="
+                },
+                {
+                  "key": "API-Version",
+                  "value": "arabica.2025-12-01"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Feb 2026 04:38:38 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"metadata\": {\n        \"key_3\": \"value_3\",\n        \"key_2\": \"value_2\",\n        \"key_1\": \"value_1\"\n    },\n    \"reference_id\": \"019c45c35846737e953da1045dd88ef7\",\n    \"payment\": {\n        \"amount\": 2,\n        \"channel\": \"EWALLET_SHOPEEPAY\",\n        \"currency\": \"MYR\",\n        \"state\": \"COMPLETED\",\n        \"type\": \"PAYMENT\",\n        \"acquirer\": {\n            \"name\": \"SHOPEE\",\n            \"id\": \"SHOPEE\"\n        },\n        \"processor\": {\n            \"response_code\": \"1\"\n        },\n        \"status\": \"SUCCESS\"\n    },\n    \"id\": \"ID-1770696954975\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-1770696955\"\n    },\n    \"customer\": {\n        \"country\": \"MY\",\n        \"address\": \"Street 1\",\n        \"phone\": \"+60812345678\",\n        \"name\": \"John Doe\",\n        \"id\": \"DOKU-CUST-001\",\n        \"email\": \"customer_email@test.com\"\n    }\n}"
+            },
+            {
+              "name": "Retrieve Payment",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id}}"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}"
+                  },
+                  {
+                    "key": "API-Version",
+                    "value": "arabica.2025-12-01"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/v3/payments/ID-1770697761301",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "payments",
+                    "ID-1770697761301"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "596"
+                },
+                {
+                  "key": "Client-Id",
+                  "value": "BRN-0207-1770620751708"
+                },
+                {
+                  "key": "Response-Timestamp",
+                  "value": "2026-02-10T04:39:02Z"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Basic ZG9rdV9rZXlfYTI1M2U0NDc2MWU3NGI5NGJmYjE4YzViY2VhNGRhYWM="
+                },
+                {
+                  "key": "API-Version",
+                  "value": "arabica.2025-12-01"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Feb 2026 04:39:02 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"metadata\": {\n        \"key_3\": \"value_3\",\n        \"key_2\": \"value_2\",\n        \"key_1\": \"value_1\"\n    },\n    \"reference_id\": \"019c45cfa742792c964dd0f99c51b740\",\n    \"payment\": {\n        \"amount\": 2,\n        \"channel\": \"EWALLET_TNG\",\n        \"currency\": \"MYR\",\n        \"state\": \"COMPLETED\",\n        \"type\": \"PAYMENT\",\n        \"acquirer\": {\n            \"name\": \"TNG\",\n            \"id\": \"TNG\"\n        },\n        \"processor\": {\n            \"approval_code\": \"20260210211212800110171159332943534\"\n        },\n        \"status\": \"SUCCESS\"\n    },\n    \"id\": \"ID-1770697761301\",\n    \"order\": {\n        \"amount\": 2,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-PAYMENT-1770697761\"\n    },\n    \"customer\": {\n        \"country\": \"MY\",\n        \"address\": \"Street 1\",\n        \"phone\": \"+60812345678\",\n        \"name\": \"John Doe\",\n        \"id\": \"DOKU-CUST-001\",\n        \"email\": \"customer_email@test.com\"\n    }\n}"
+            }
+          ]
         }
       ],
       "description": "The Payment API is a unified direct payment API that supports multiple payment channels through a single endpoint. Merchants specify the desired payment channel in the request payload, allowing full customization of the payment flow and user experience.  \n  \nLearn more [here](https://doku-developers.apidog.io/overview-1926304m0)."
+    },
+    {
+      "name": "Cards Payment API",
+      "item": [
+        {
+          "name": "Payment Form",
+          "item": [
+            {
+              "name": "Request Payment",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "var uuid = require('uuid');",
+                      "pm.variables.set(\"request_id\", uuid.v4());",
+                      "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+                      "",
+                      "function generateSignature(jsonBody) {",
+                      "    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
+                      "    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+                      "    console.log('Digest Component: ' + jsonBody)",
+                      "    console.log('Digest sha256: ' + digestSHA256)",
+                      "    console.log('Digest: ' + digestBase64)",
+                      "    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id_sandbox') +'\\n'+",
+                      "    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+                      "    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+                      "    'Request-Target:/credit-card/v1/payment-page' + '\\n'+",
+                      "    'Digest:' + digestBase64;",
+                      "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key_sandbox'));",
+                      "    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+                      "    console.log('Signature Components: ' + signatureComponents)",
+                      "    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+                      "    console.log('Signature: ' + signatureBase64)",
+                      "    return 'HMACSHA256='+signatureBase64;",
+                      "}",
+                      "",
+                      "pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id_sandbox}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Request-Id",
+                    "value": "{{request_id}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Signature",
+                    "value": "{{signature}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \n    \"order\": {\n       \t\"invoice_number\":\"INV-DIRECT-CC-{{$timestamp}}\",\n       \t\"amount\": 4.5,\n       \t\"callback_url\": \"https://doku.com\",\n       \t\"auto_redirect\": false,\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n    \t\"id\":\"DOKU-CUST-001\",\n    \t\"name\":\"Anton Budiman\",\n    \t\"email\":\"anton@doku.com\",\n    \t\"phone\":\"+6281287458232\"\n\t},\n    \"payment\": {\n        \"type\":\"SALE\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/credit-card/v1/payment-page",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "credit-card",
+                    "v1",
+                    "payment-page"
+                  ]
+                },
+                "description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Host-to-host Payment",
+          "item": [
+            {
+              "name": "Check Three D Secure",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Client-Id",
+                    "value": "MCH-0001-12345678901234",
+                    "description": "Merchant Client ID registered in DOKU"
+                  },
+                  {
+                    "key": "Request-Id",
+                    "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                    "description": "Unique identifier for each request (UUID v4 recommended)"
+                  },
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "2024-01-15T10:30:00Z",
+                    "description": "Request timestamp in ISO 8601 format"
+                  },
+                  {
+                    "key": "Signature",
+                    "value": "HMACSHA256=base64encodedSignature==",
+                    "description": "HMAC-SHA256 signature for request authentication"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order\": {\n        \"amount\": 150000,\n        \"currency\": \"MYR\",\n        \"invoice_number\": \"INV-2024-001\",\n        \"descriptor\": \"DOKU Payment\"\n  },\n  \"card\": {\n        \"number\": \"4111111111111111\",\n        \"expiry\": \"1225\",\n        \"cardholder_name\": \"John Doe\",\n        \"cardholder_email_address\": \"john.doe@example.com\",\n        \"cardholder_phone_number\": \"081234567890\"\n  },\n  \"three_d_secure\": {\n        \"callback_url_success\": \"https://merchant.com/payment/success\",\n        \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n        \"type\": \"SALE\"\n  },\n  \"customer\": {\n        \"id\": \"CUST-001\",\n        \"name\": \"John Doe\",\n        \"email\": \"john.doe@example.com\",\n        \"phone\": \"081234567890\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/check-three-d-secure",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "check-three-d-secure"
+                  ]
+                },
+                "description": "Endpoint for H2H merchants to check 3D Secure eligibility on a credit card. Returns an authentication URL used to redirect the consumer to the 3DS challenge page.\n"
+              },
+              "response": [
+                {
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\",\n    \"descriptor\": \"DOKU Payment\"\n  },\n  \"card\": {\n    \"number\": \"4111111111111111\",\n    \"expiry\": \"1225\",\n    \"cardholder_name\": \"John Doe\",\n    \"cardholder_email_address\": \"john.doe@example.com\",\n    \"cardholder_phone_number\": \"081234567890\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"SALE\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-001\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"081234567890\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\"\n  },\n  \"three_d_secure\": {\n    \"authentication_id\": \"AUTH-20240115-001\",\n    \"authentication_url\": \"https://3ds.doku.com/authenticate?id=AUTH-20240115-001\",\n    \"three_ds_version\": \"2.0\"\n  }\n}"
+                },
+                {
+                  "name": "AUTHORIZE",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\",\n    \"descriptor\": \"DOKU Payment\"\n  },\n  \"card\": {\n    \"number\": \"4111111111111111\",\n    \"expiry\": \"1225\",\n    \"cardholder_name\": \"John Doe\",\n    \"cardholder_email_address\": \"john.doe@example.com\",\n    \"cardholder_phone_number\": \"081234567890\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"AUTHORIZE\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-001\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"081234567890\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\"\n  },\n  \"three_d_secure\": {\n    \"authentication_id\": \"AUTH-20240115-001\",\n    \"authentication_url\": \"https://3ds.doku.com/authenticate?id=AUTH-20240115-001\",\n    \"three_ds_version\": \"2.0\"\n  }\n}"
+                },
+                {
+                  "name": "INSTALLMENT",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 1200000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-002\"\n  },\n  \"card\": {\n    \"number\": \"5200000000000007\",\n    \"expiry\": \"0326\",\n    \"cardholder_name\": \"Jane Smith\",\n    \"cardholder_email_address\": \"jane.smith@example.com\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"INSTALLMENT\",\n    \"tenor\": \"12\",\n    \"acquirer\": \"BCA\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-002\",\n    \"name\": \"Jane Smith\",\n    \"email\": \"jane.smith@example.com\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\"\n  },\n  \"three_d_secure\": {\n    \"authentication_id\": \"AUTH-20240115-001\",\n    \"authentication_url\": \"https://3ds.doku.com/authenticate?id=AUTH-20240115-001\",\n    \"three_ds_version\": \"2.0\"\n  }\n}"
+                },
+                {
+                  "name": "Validation failed",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\",\n    \"descriptor\": \"DOKU Payment\"\n  },\n  \"card\": {\n    \"number\": \"4111111111111111\",\n    \"expiry\": \"1225\",\n    \"cardholder_name\": \"John Doe\",\n    \"cardholder_email_address\": \"john.doe@example.com\",\n    \"cardholder_phone_number\": \"081234567890\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"SALE\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-001\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"081234567890\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"error\": {\n    \"code\": \"INVALID_FIELD\",\n    \"message\": \"Card number is invalid\"\n  }\n}"
+                },
+                {
+                  "name": "AUTHORIZE",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\",\n    \"descriptor\": \"DOKU Payment\"\n  },\n  \"card\": {\n    \"number\": \"4111111111111111\",\n    \"expiry\": \"1225\",\n    \"cardholder_name\": \"John Doe\",\n    \"cardholder_email_address\": \"john.doe@example.com\",\n    \"cardholder_phone_number\": \"081234567890\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"AUTHORIZE\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-001\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"081234567890\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"error\": {\n    \"code\": \"INVALID_FIELD\",\n    \"message\": \"Card number is invalid\"\n  }\n}"
+                },
+                {
+                  "name": "INSTALLMENT",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 1200000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-002\"\n  },\n  \"card\": {\n    \"number\": \"5200000000000007\",\n    \"expiry\": \"0326\",\n    \"cardholder_name\": \"Jane Smith\",\n    \"cardholder_email_address\": \"jane.smith@example.com\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"INSTALLMENT\",\n    \"tenor\": \"12\",\n    \"acquirer\": \"BCA\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-002\",\n    \"name\": \"Jane Smith\",\n    \"email\": \"jane.smith@example.com\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"error\": {\n    \"code\": \"INVALID_FIELD\",\n    \"message\": \"Card number is invalid\"\n  }\n}"
+                },
+                {
+                  "name": "SALE",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\",\n    \"descriptor\": \"DOKU Payment\"\n  },\n  \"card\": {\n    \"number\": \"4111111111111111\",\n    \"expiry\": \"1225\",\n    \"cardholder_name\": \"John Doe\",\n    \"cardholder_email_address\": \"john.doe@example.com\",\n    \"cardholder_phone_number\": \"081234567890\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"SALE\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-001\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"081234567890\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\",\n    \"discount_amount\": 10000\n  },\n  \"three_d_secure\": {\n    \"authentication_id\": \"AUTH-20240115-001\",\n    \"authentication_url\": \"https://3ds.doku.com/authenticate?id=AUTH-20240115-001\",\n    \"three_ds_version\": \"2.0\",\n    \"auth_jwt\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\"\n  },\n  \"error\": {\n    \"code\": \"INVALID_FIELD\",\n    \"message\": \"Card number is invalid\"\n  }\n}"
+                },
+                {
+                  "name": "AUTHORIZE",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\",\n    \"descriptor\": \"DOKU Payment\"\n  },\n  \"card\": {\n    \"number\": \"4111111111111111\",\n    \"expiry\": \"1225\",\n    \"cardholder_name\": \"John Doe\",\n    \"cardholder_email_address\": \"john.doe@example.com\",\n    \"cardholder_phone_number\": \"081234567890\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"AUTHORIZE\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-001\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"081234567890\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\",\n    \"discount_amount\": 10000\n  },\n  \"three_d_secure\": {\n    \"authentication_id\": \"AUTH-20240115-001\",\n    \"authentication_url\": \"https://3ds.doku.com/authenticate?id=AUTH-20240115-001\",\n    \"three_ds_version\": \"2.0\",\n    \"auth_jwt\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\"\n  },\n  \"error\": {\n    \"code\": \"INVALID_FIELD\",\n    \"message\": \"Card number is invalid\"\n  }\n}"
+                },
+                {
+                  "name": "INSTALLMENT",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 1200000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-002\"\n  },\n  \"card\": {\n    \"number\": \"5200000000000007\",\n    \"expiry\": \"0326\",\n    \"cardholder_name\": \"Jane Smith\",\n    \"cardholder_email_address\": \"jane.smith@example.com\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"INSTALLMENT\",\n    \"tenor\": \"12\",\n    \"acquirer\": \"BCA\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-002\",\n    \"name\": \"Jane Smith\",\n    \"email\": \"jane.smith@example.com\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\",\n    \"discount_amount\": 10000\n  },\n  \"three_d_secure\": {\n    \"authentication_id\": \"AUTH-20240115-001\",\n    \"authentication_url\": \"https://3ds.doku.com/authenticate?id=AUTH-20240115-001\",\n    \"three_ds_version\": \"2.0\",\n    \"auth_jwt\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\"\n  },\n  \"error\": {\n    \"code\": \"INVALID_FIELD\",\n    \"message\": \"Card number is invalid\"\n  }\n}"
+                },
+                {
+                  "name": "Merchant has not configured 3DS",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\",\n    \"descriptor\": \"DOKU Payment\"\n  },\n  \"card\": {\n    \"number\": \"4111111111111111\",\n    \"expiry\": \"1225\",\n    \"cardholder_name\": \"John Doe\",\n    \"cardholder_email_address\": \"john.doe@example.com\",\n    \"cardholder_phone_number\": \"081234567890\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"SALE\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-001\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"081234567890\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "Precondition Failed",
+                  "code": 412,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"error\": {\n    \"code\": \"MERCHANT_NOT_CONFIGURED\",\n    \"message\": \"Merchant does not have Three D Secure configuration\"\n  }\n}"
+                },
+                {
+                  "name": "AUTHORIZE",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 150000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-001\",\n    \"descriptor\": \"DOKU Payment\"\n  },\n  \"card\": {\n    \"number\": \"4111111111111111\",\n    \"expiry\": \"1225\",\n    \"cardholder_name\": \"John Doe\",\n    \"cardholder_email_address\": \"john.doe@example.com\",\n    \"cardholder_phone_number\": \"081234567890\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"AUTHORIZE\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-001\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"081234567890\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "Precondition Failed",
+                  "code": 412,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"error\": {\n    \"code\": \"MERCHANT_NOT_CONFIGURED\",\n    \"message\": \"Merchant does not have Three D Secure configuration\"\n  }\n}"
+                },
+                {
+                  "name": "INSTALLMENT",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Merchant Client ID registered in DOKU",
+                        "key": "Client-Id",
+                        "value": "MCH-0001-12345678901234"
+                      },
+                      {
+                        "description": "Unique identifier for each request (UUID v4 recommended)",
+                        "key": "Request-Id",
+                        "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      {
+                        "description": "Request timestamp in ISO 8601 format",
+                        "key": "Request-Timestamp",
+                        "value": "2024-01-15T10:30:00Z"
+                      },
+                      {
+                        "description": "HMAC-SHA256 signature for request authentication",
+                        "key": "Signature",
+                        "value": "HMACSHA256=base64encodedSignature=="
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Signature",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"order\": {\n    \"amount\": 1200000,\n    \"currency\": \"MYR\",\n    \"invoice_number\": \"INV-2024-002\"\n  },\n  \"card\": {\n    \"number\": \"5200000000000007\",\n    \"expiry\": \"0326\",\n    \"cardholder_name\": \"Jane Smith\",\n    \"cardholder_email_address\": \"jane.smith@example.com\"\n  },\n  \"three_d_secure\": {\n    \"callback_url_success\": \"https://merchant.com/payment/success\",\n    \"callback_url_failed\": \"https://merchant.com/payment/failed\"\n  },\n  \"payment\": {\n    \"type\": \"INSTALLMENT\",\n    \"tenor\": \"12\",\n    \"acquirer\": \"BCA\"\n  },\n  \"customer\": {\n    \"id\": \"CUST-002\",\n    \"name\": \"Jane Smith\",\n    \"email\": \"jane.smith@example.com\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/check-three-d-secure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "check-three-d-secure"
+                      ]
+                    }
+                  },
+                  "status": "Precondition Failed",
+                  "code": 412,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"error\": {\n    \"code\": \"MERCHANT_NOT_CONFIGURED\",\n    \"message\": \"Merchant does not have Three D Secure configuration\"\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Capture Authorized Transaction",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "2020-12-21T07:56:11.000Z",
+                    "description": "Timestamp request on UTC time in ISO8601 UTC+0 format"
+                  },
+                  {
+                    "key": "Signature",
+                    "value": "HMACSHA256=+xey5+Yk8Jzzw5cOrbhArGMtmoDt26+/6KCgIdOiLVg=",
+                    "description": "HMACSHA256 from signature components, to generate signature please refer to [this](https://doku-developers.apidog.io/signature-component-from-request-header-1387601m0) page."
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "BRN-0205-1700537885721",
+                    "description": "Unique ID for a partner (DOKU'S Client ID)"
+                  },
+                  {
+                    "key": "Request-Id",
+                    "value": "418075533589",
+                    "description": "Unique random string (max 128 characters) generated from merchant side to protect duplicate request"
+                  },
+                  {
+                    "key": "Request-Target",
+                    "value": "/credit-card/v1/payment-page",
+                    "description": "path of target request"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"payment\": {\n        \"authorize_id\": \"193869186391\",\n        \"capture_amount\": 9957,\n        \"currency\": \"MYR\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/credit-card/capture",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "credit-card",
+                    "capture"
+                  ]
+                },
+                "description": "Environment\nSandbox - https://api-sandbox.doku.com\nProduction - https://api.doku.com"
+              },
+              "response": [
+                {
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Timestamp request on UTC time in ISO8601 UTC+0 format",
+                        "key": "Request-Timestamp",
+                        "value": "2020-12-21T07:56:11.000Z"
+                      },
+                      {
+                        "description": "HMACSHA256 from signature components, to generate signature please refer to [this](https://doku-developers.apidog.io/signature-component-from-request-header-1387601m0) page.",
+                        "key": "Signature",
+                        "value": "HMACSHA256=+xey5+Yk8Jzzw5cOrbhArGMtmoDt26+/6KCgIdOiLVg="
+                      },
+                      {
+                        "description": "Unique ID for a partner (DOKU'S Client ID)",
+                        "key": "Client-Id",
+                        "value": "BRN-0205-1700537885721"
+                      },
+                      {
+                        "description": "Unique random string (max 128 characters) generated from merchant side to protect duplicate request",
+                        "key": "Request-Id",
+                        "value": "418075533589"
+                      },
+                      {
+                        "description": "path of target request",
+                        "key": "Request-Target",
+                        "value": "/credit-card/v1/payment-page"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"payment\": {\n    \"authorize_id\": \"193869186391\",\n    \"capture_amount\": 9957,\n    \"currency\": \"MYR\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/credit-card/capture",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "credit-card",
+                        "capture"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"order\": {\n    \"invoice_number\": \"INV-0001\",\n    \"amount\": 10000,\n    \"descriptor\": \"BIILING-INV-0001\",\n    \"currency\": \"MY\"\n  },\n  \"customer\": {\n    \"id\": \"Test001\",\n    \"zip_code\": \"16455\",\n    \"country\": \"MY\",\n    \"name\": \"DOKU Merchant\",\n    \"state\": \"Malaysia\",\n    \"city\": \"Selangor\",\n    \"address\": \"Selangor, Malaysia\",\n    \"phone\": \"0282938478293\",\n    \"email\": \"merchant@doku.com\"\n  },\n  \"payment\": {\n    \"type\": \"CAPTURE\",\n    \"request_id\": \"418075533589\",\n    \"response_code\": \"00\",\n    \"response_message\": \"Approved\",\n    \"status\": \"SUCCES\",\n    \"authorize_id\": \"193869186391\",\n    \"approval_code\": \"112233\"\n  },\n  \"card\": {\n    \"token\": \"536794906625cd02616510faa8460996\",\n    \"masked\": \"557338*******101\",\n    \"type\": \"CREDIT\",\n    \"issuer\": \"OCBC Berhad\",\n    \"brand\": \"VISA\"\n  }\n}"
+                },
+                {
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Timestamp request on UTC time in ISO8601 UTC+0 format",
+                        "key": "Request-Timestamp",
+                        "value": "2020-12-21T07:56:11.000Z"
+                      },
+                      {
+                        "description": "HMACSHA256 from signature components, to generate signature please refer to [this](https://doku-developers.apidog.io/signature-component-from-request-header-1387601m0) page.",
+                        "key": "Signature",
+                        "value": "HMACSHA256=+xey5+Yk8Jzzw5cOrbhArGMtmoDt26+/6KCgIdOiLVg="
+                      },
+                      {
+                        "description": "Unique ID for a partner (DOKU'S Client ID)",
+                        "key": "Client-Id",
+                        "value": "BRN-0205-1700537885721"
+                      },
+                      {
+                        "description": "Unique random string (max 128 characters) generated from merchant side to protect duplicate request",
+                        "key": "Request-Id",
+                        "value": "418075533589"
+                      },
+                      {
+                        "description": "path of target request",
+                        "key": "Request-Target",
+                        "value": "/credit-card/v1/payment-page"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"payment\": {\n    \"authorize_id\": \"193869186391\",\n    \"capture_amount\": 9957,\n    \"currency\": \"MYR\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/credit-card/capture",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "credit-card",
+                        "capture"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"error\": {\n    \"code\": \"INVALID_PARAMETER\",\n    \"message\": \"{field} Must Not Be Blank\",\n    \"type\": \"Invalid Parameter\"\n  }\n}"
+                },
+                {
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Timestamp request on UTC time in ISO8601 UTC+0 format",
+                        "key": "Request-Timestamp",
+                        "value": "2020-12-21T07:56:11.000Z"
+                      },
+                      {
+                        "description": "HMACSHA256 from signature components, to generate signature please refer to [this](https://doku-developers.apidog.io/signature-component-from-request-header-1387601m0) page.",
+                        "key": "Signature",
+                        "value": "HMACSHA256=+xey5+Yk8Jzzw5cOrbhArGMtmoDt26+/6KCgIdOiLVg="
+                      },
+                      {
+                        "description": "Unique ID for a partner (DOKU'S Client ID)",
+                        "key": "Client-Id",
+                        "value": "BRN-0205-1700537885721"
+                      },
+                      {
+                        "description": "Unique random string (max 128 characters) generated from merchant side to protect duplicate request",
+                        "key": "Request-Id",
+                        "value": "418075533589"
+                      },
+                      {
+                        "description": "path of target request",
+                        "key": "Request-Target",
+                        "value": "/credit-card/v1/payment-page"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"payment\": {\n    \"authorize_id\": \"193869186391\",\n    \"capture_amount\": 9957,\n    \"currency\": \"MYR\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/credit-card/capture",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "credit-card",
+                        "capture"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"timestamp\": \"2025-09-01T03:46:22.404+00:00\",\n  \"status\": \"500\",\n  \"error\": \"Internal Server Error\",\n  \"path\": \"/credit-card/v1/payment-page\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Charge Payment",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "var uuid = require('uuid');",
+                      "pm.variables.set(\"request_id\", uuid.v4());",
+                      "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+                      "",
+                      "function generateSignature(jsonBody) {",
+                      "    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
+                      "    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+                      "    console.log('Digest Component: ' + jsonBody)",
+                      "    console.log('Digest sha256: ' + digestSHA256)",
+                      "    console.log('Digest: ' + digestBase64)",
+                      "    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id_sandbox') +'\\n'+",
+                      "    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+                      "    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+                      "    'Request-Target:/credit-card/charge' + '\\n'+",
+                      "    'Digest:' + digestBase64;",
+                      "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key_sandbox'));",
+                      "    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+                      "    console.log('Signature Components: ' + signatureComponents)",
+                      "    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+                      "    console.log('Signature: ' + signatureBase64)",
+                      "    return 'HMACSHA256='+signatureBase64;",
+                      "}",
+                      "",
+                      "pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Request-Timestamp",
+                    "value": "{{request_timestamp}}",
+                    "description": "(Required) Timestamp request on UTC time in ISO8601 UTC+0 format format"
+                  },
+                  {
+                    "key": "Signature",
+                    "value": "{{signature}}",
+                    "description": "(Required) HMACSHA256 from signature components"
+                  },
+                  {
+                    "key": "Client-Id",
+                    "value": "{{client_id_sandbox}}",
+                    "description": "(Required) Unique ID for a partner (DOKU'S Client ID)"
+                  },
+                  {
+                    "key": "Request-Id",
+                    "value": "{{request_id}}",
+                    "description": "(Required) Numeric String. Reference number that should be unique in the same day (request-id)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"order\": {\n        \"invoice_number\": \"INV-CHARGE-{{$timestamp}}\",\n        \"amount\": 5,\n        \"descriptor\": \"BILLING-INV-0001\",\n        \"currency\": \"MYR\"\n    },\n    \"customer\": {\n        \"id\": \"DOKU-CUST-001\"\n    },\n    \"payment\": {\n        \"type\": \"MOTO\"\n    },\n    \"card\": {\n        \"token\": \"b8aede930b6bc940f6cce14c0f55c05d\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/credit-card/charge",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "credit-card",
+                    "charge"
+                  ]
+                },
+                "description": "Environment\nSandbox - https://api-sandbox.doku.com\nProduction - https://api.doku.com"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Unbind Token",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "var uuid = require('uuid');",
+                  "pm.variables.set(\"request_id\", uuid.v4());",
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+                  "",
+                  "function generateSignature(jsonBody) {",
+                  "    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
+                  "    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+                  "    console.log('Digest Component: ' + jsonBody)",
+                  "    console.log('Digest sha256: ' + digestSHA256)",
+                  "    console.log('Digest: ' + digestBase64)",
+                  "    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id_sandbox') +'\\n'+",
+                  "    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+                  "    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+                  "    'Request-Target:/tokenization/v2/delete-token' + '\\n'+",
+                  "    'Digest:' + digestBase64;",
+                  "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key_sandbox'));",
+                  "    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+                  "    console.log('Signature Components: ' + signatureComponents)",
+                  "    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+                  "    console.log('Signature: ' + signatureBase64)",
+                  "    return 'HMACSHA256='+signatureBase64;",
+                  "}",
+                  "",
+                  "pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Client-Id",
+                "value": "{{client_id_sandbox}}",
+                "type": "text"
+              },
+              {
+                "key": "Request-Id",
+                "value": "{{request_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Signature",
+                "value": "{{signature}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"token\": {\n        \"id\": \"b8aede930b6bc940f6cce14c0f55c05d\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/tokenization/v2/delete-token",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "tokenization",
+                "v2",
+                "delete-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Request Refund",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "var uuid = require('uuid');",
+                  "pm.variables.set(\"request_id\", uuid.v4());",
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+                  "",
+                  "function generateSignature(jsonBody) {",
+                  "    var digestSHA256 = CryptoJS.SHA256(CryptoJS.enc.Utf8.parse(jsonBody));",
+                  "    var digestBase64 = CryptoJS.enc.Base64.stringify(digestSHA256);",
+                  "    console.log('Digest Component: ' + jsonBody)",
+                  "    console.log('Digest sha256: ' + digestSHA256)",
+                  "    console.log('Digest: ' + digestBase64)",
+                  "    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id_sandbox') +'\\n'+",
+                  "    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+                  "    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+                  "    'Request-Target:/cancellation/credit-card/refund' + '\\n'+",
+                  "    'Digest:' + digestBase64;",
+                  "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key_sandbox'));",
+                  "    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+                  "    console.log('Signature Components: ' + signatureComponents)",
+                  "    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+                  "    console.log('Signature: ' + signatureBase64)",
+                  "    return 'HMACSHA256='+signatureBase64;",
+                  "}",
+                  "",
+                  "pm.variables.set('signature', generateSignature(pm.variables.replaceIn(pm.request.body.raw)));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disabledSystemHeaders": {
+              "accept": true
+            }
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Client-Id",
+                "value": "{{client_id_sandbox}}",
+                "type": "text"
+              },
+              {
+                "key": "Request-Id",
+                "value": "{{request_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Signature",
+                "value": "{{signature}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"order\": {\n        \"invoice_number\": \"INV-DIRECT-CC-1777391491\"\n    },\n    \"payment\": {\n        \"original_request_id\": \"d1533db5-631e-4fe7-9c8d-913340ad6bfb\"\n    },\n    \"refund\": {\n        \"amount\": 4.5\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/cancellation/credit-card/refund",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "cancellation",
+                "credit-card",
+                "refund"
+              ]
+            },
+            "description": "| Header Parameter | Type | Description |\n| --- | --- | --- |\n| Client-Id | `string` | The Client ID you retrieved from Jokul Back Office<br>`MANDATORY` |\n| Request-Id | `string` | Random string that must unique per request for idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |\n| Request-Timestamp | `string` | Request time in ISO8601 format with UTC + 0<br>`MANDATORY` |\n| Signature | `string` | Security parameter to ensure the request's authenticity. Learn more how to generate Signature [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|"
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve Payment",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "var uuid = require('uuid');",
+                  "pm.variables.set(\"request_id\", uuid.v4());",
+                  "pm.variables.set(\"request_timestamp\", new Date().toISOString().slice(0, 19)+\"Z\");",
+                  "",
+                  "function generateSignature() {",
+                  "    var invoiceNumber = 'INV-DIRECT-CC-1777391491'; // Replace this with the Invoice Number or Request-Id as the query params",
+                  "",
+                  "    var signatureComponents = 'Client-Id:' + pm.variables.get('client_id_sandbox') +'\\n'+",
+                  "    'Request-Id:' + pm.variables.get('request_id') +'\\n'+",
+                  "    'Request-Timestamp:' + pm.variables.get('request_timestamp') + '\\n'+",
+                  "    'Request-Target:' + '/orders/v1/status/' + invoiceNumber",
+                  "    var signatureHmacSha256 = CryptoJS.HmacSHA256(signatureComponents,pm.variables.get('secret_key_sandbox'));",
+                  "    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);",
+                  "    console.log('Signature Components: ' + signatureComponents)",
+                  "    console.log('Signature HMACSHA256: ' + signatureHmacSha256)",
+                  "    console.log('Signature: ' + signatureBase64)",
+                  "    return 'HMACSHA256='+signatureBase64;",
+                  "}",
+                  "",
+                  "pm.variables.set('signature', generateSignature());"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Client-Id",
+                "value": "{{client_id_sandbox}}",
+                "type": "text"
+              },
+              {
+                "key": "Request-Id",
+                "value": "{{request_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Signature",
+                "value": "{{signature}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/orders/v1/status/INV-DIRECT-CC-1777391491",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "orders",
+                "v1",
+                "status",
+                "INV-DIRECT-CC-1777391491"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "By using this Cards, your customers can pay their order with their credit card or any online transaction capable debit card. DOKU has partnered with various banks and principals (Visa, MasterCard) to provide a secure and seamless payment experience for your customers."
     }
   ],
   "event": [
@@ -496,6 +3040,46 @@
     },
     {
       "key": "api_key",
+      "value": ""
+    },
+    {
+      "key": "url_sandbox",
+      "value": ""
+    },
+    {
+      "key": "client_id_subs",
+      "value": ""
+    },
+    {
+      "key": "secret_key_subs",
+      "value": ""
+    },
+    {
+      "key": "client_id_sandbox",
+      "value": ""
+    },
+    {
+      "key": "secret_key_sandbox",
+      "value": ""
+    },
+    {
+      "key": "api_key_sandbox",
+      "value": ""
+    },
+    {
+      "key": "client_id_uat",
+      "value": ""
+    },
+    {
+      "key": "secret_key_uat",
+      "value": ""
+    },
+    {
+      "key": "api_key_uat",
+      "value": ""
+    },
+    {
+      "key": "url_uat",
       "value": ""
     },
     {
